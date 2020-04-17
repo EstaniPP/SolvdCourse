@@ -1,0 +1,8 @@
+2020-04-12 18:58:19 ERROR Runner:95 - com.solvd.carFactory.exceptions.CarNoPartsException
+2020-04-12 18:58:19 ERROR Runner:73 - com.solvd.carFactory.exceptions.CarNotFoundException
+2020-04-12 18:58:19 ERROR Runner:86 - com.solvd.carFactory.exceptions.PartFactoryNotFoundException
+2020-04-12 18:58:19 ERROR Runner:106 - com.solvd.carFactory.exceptions.PartNotFoundException
+2020-04-12 18:58:19 ERROR Runner:115 - com.solvd.carFactory.exceptions.InvalidProductException
+2020-04-12 18:58:19 ERROR WorkerEmployee:33 - com.solvd.carFactory.exceptions.OvertimeCostNotFoundException
+2020-04-12 18:58:19 INFO  Runner:151 - Total department salaries: 190.0
+2020-04-12 18:58:19 INFO  Runner:152 - Total factory employees: 3
