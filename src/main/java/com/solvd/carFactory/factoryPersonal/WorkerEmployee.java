@@ -37,10 +37,13 @@ public class WorkerEmployee extends FullTimeEmployee{
 	}
 	
 	public Double getOvertimeCostPerHour() throws Exception {
-		if(overtimeCostPerHour == null) {
-			throw new OvertimeCostNotFoundException();
+		if(overtimeHours>0) {
+			if(overtimeCostPerHour == null) {
+				throw new OvertimeCostNotFoundException();
+			}
+			return overtimeCostPerHour;
 		}
-		return overtimeCostPerHour;
+		return 0.0;
 	}
 	
 	public void setOvertimeCostPerHour(Double overtimeCostPerHour) {

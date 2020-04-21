@@ -6,7 +6,7 @@ import com.solvd.carFactory.factoryPersonal.Employee;
 
 public class Department {
 
-	
+	private String name;
 	private String specialization;
 	private ArrayList<Employee> employees;
 	private Employee departmentDirector;
@@ -26,7 +26,9 @@ public class Department {
 	}
 	
 	public ArrayList<Employee> getEmployees() {
-		return employees;
+		ArrayList<Employee> a = ((ArrayList<Employee>) employees.clone());
+		a.add(getDepartmentDirector());
+		return a;
 	}
 	
 	public String getSpecialization() {
@@ -59,5 +61,13 @@ public class Department {
 			quantity += e.getStatus().isStillInFactory() ? 1 : 0;
 		}
 		return quantity;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

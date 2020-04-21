@@ -18,6 +18,7 @@ public class CarFactory extends Factory implements IReceive{
 
 	private HashMap<Product, Integer> inventory;//(product, quantity)
 	private HashMap<Product, PartFactory> providers;//(prductId, partFactory which produces it)
+	private String name;
 	
 	public CarFactory(String name, EjecutiveEmployee director, String phone) {
 		super(name, director, phone);
@@ -97,5 +98,13 @@ public class CarFactory extends Factory implements IReceive{
 			throw new InvalidProductException();
 		}
 		
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

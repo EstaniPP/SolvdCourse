@@ -73,4 +73,9 @@ public abstract class Employee {
 		return status;
 	}
 	public abstract Double getSalary();
+	
+	@Override
+	public String toString() {
+		return "Employee: "+name+" salary "+this.getSalary();
+	}
 }

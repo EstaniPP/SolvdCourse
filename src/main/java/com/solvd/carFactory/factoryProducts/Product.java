@@ -43,4 +43,9 @@ public abstract class Product {
 		return id;
 	}
 	
+	@Override
+	public String toString() {
+		return "Product id: "+id+ " name: " +name + " price: " + this.getPrice();
+	}
+	
 }
