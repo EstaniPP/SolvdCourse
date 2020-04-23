@@ -10,49 +10,49 @@ public enum EmployeePosition {
 	HUMAN_RESOURCES_EMPLOYEE(true,false,false,true,false,false,false),
 	ACCOUNTANT(true,true,true,false,false,true,false);
 	
-	private final Boolean canAccessEmployeeInfo;
-	private final Boolean canAccessStockInfo;
-	private final Boolean canAccessEconomicInfo;
-	private final Boolean canChangeEmployeeInfo;
-	private final Boolean canChangeStockInfo;
-	private final Boolean canChangeEconomicInfo;
-	private final Boolean canProduce;
+	private final Boolean getAccessEmployeeInfo;
+	private final Boolean getAccessStockInfo;
+	private final Boolean getAccessEconomicInfo;
+	private final Boolean getChangeEmployeeInfo;
+	private final Boolean getChangeStockInfo;
+	private final Boolean getChangeEconomicInfo;
+	private final Boolean getProduce;
 	
-	private EmployeePosition(Boolean canAccessEmployeeInfo,Boolean canAccessStockInfo,Boolean canAccessEconomicInfo,Boolean canChangeEmployeeInfo,Boolean canChangeStockInfo,Boolean canChangeEconomicInfo,Boolean canProduce) {
-		this.canAccessEmployeeInfo = canAccessEmployeeInfo;
-		this.canAccessStockInfo = canAccessStockInfo;
-		this.canAccessEconomicInfo = canAccessEconomicInfo;
-		this.canChangeEmployeeInfo = canChangeEmployeeInfo;
-		this.canChangeStockInfo = canChangeStockInfo;
-		this.canChangeEconomicInfo = canChangeEconomicInfo;
-		this.canProduce = canProduce;
+	private EmployeePosition(Boolean getAccessEmployeeInfo,Boolean getAccessStockInfo,Boolean getAccessEconomicInfo,Boolean getChangeEmployeeInfo,Boolean getChangeStockInfo,Boolean getChangeEconomicInfo,Boolean getProduce) {
+		this.getAccessEmployeeInfo = getAccessEmployeeInfo;
+		this.getAccessStockInfo = getAccessStockInfo;
+		this.getAccessEconomicInfo = getAccessEconomicInfo;
+		this.getChangeEmployeeInfo = getChangeEmployeeInfo;
+		this.getChangeStockInfo = getChangeStockInfo;
+		this.getChangeEconomicInfo = getChangeEconomicInfo;
+		this.getProduce = getProduce;
 	}
 	
-	public Boolean canAccessEconomicInfo() {
-		return canAccessEconomicInfo;
+	public Boolean getAccessEconomicInfo() {
+		return getAccessEconomicInfo;
 	}
 	
-	public Boolean canAccessEmployeeInfo() {
-		return canAccessEmployeeInfo;
+	public Boolean getAccessEmployeeInfo() {
+		return getAccessEmployeeInfo;
 	}
 	
-	public Boolean canAccessStockInfo() {
-		return canAccessStockInfo;
+	public Boolean getAccessStockInfo() {
+		return getAccessStockInfo;
 	}
 	
-	public Boolean canChangeEconomicInfo() {
-		return canChangeEconomicInfo;
+	public Boolean getChangeEconomicInfo() {
+		return getChangeEconomicInfo;
 	}
 	
-	public Boolean canProduce() {
-		return canProduce;
+	public Boolean getProduce() {
+		return getProduce;
 	}
 	
-	public Boolean canChangeEmployeeInfo() {
-		return canChangeEmployeeInfo;
+	public Boolean getChangeEmployeeInfo() {
+		return getChangeEmployeeInfo;
 	}
 	
-	public Boolean canChangeStockInfo() {
-		return canChangeStockInfo;
+	public Boolean getChangeStockInfo() {
+		return getChangeStockInfo;
 	}	
 }
