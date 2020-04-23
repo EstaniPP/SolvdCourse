@@ -1,6 +1,9 @@
 package com.solvd.carFactory.factories;
 
 import com.solvd.carFactory.exceptions.PartNotFoundException;
+
+import java.util.Optional;
+
 import com.solvd.carFactory.exceptions.InvalidProductException;
 import com.solvd.carFactory.factoryPersonal.EjecutiveEmployee;
 import com.solvd.carFactory.factoryProducts.Order;
@@ -22,17 +25,12 @@ public class PartFactory extends Factory {
 	
 	@Override
 	public void produce(Order o) throws PartNotFoundException {
-		Boolean exists = false;
-		Part part = null;
-		for(Product p : this.getProducts()) {
-			if(p.getId() == o.getProduct()) {
-				part = (Part) p;
-				exists = true;
-				break;
-			}
+		Optional<Product> exists = this.getProducts().stream().filter(p -> p.getId() == o.getProduct()).findFirst();
+		if(!exists.isPresent()) {
+			throw new PartNotFoundException();
+		}else {
+			o.getClient().receive(exists.get(),o.getQuantity());
 		}
-		if(exists == false) {throw new PartNotFoundException();}
-		o.getClient().receive(part,o.getQuantity());
 	}
 	
 	public void setSpecialization(String specialization) {

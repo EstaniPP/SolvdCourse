@@ -1,6 +1,7 @@
 package com.solvd.carFactory.factories;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import com.solvd.carFactory.exceptions.CarNoPartsException;
 import com.solvd.carFactory.exceptions.CarNotFoundException;
@@ -33,16 +34,11 @@ public class CarFactory extends Factory implements IReceive{
 
 	@Override
 	public void produce(Order o) throws CarNotFoundException, PartFactoryNotFoundException, CarNoPartsException, PartNotFoundException{
-		Boolean exists = false;
-		Car car = null;
-		for(Product p : this.getProducts()) {
-			if(p.getId() == o.getProduct()) {
-				car = (Car) p;
-				exists = true;
-				break;
-			}
-		}
-		if(exists == false) {throw new CarNotFoundException();}
+
+		Optional<Product> exists = this.getProducts().stream().filter(p -> p.getId() == o.getProduct()).findAny();
+		
+		if(!exists.isPresent()) {throw new CarNotFoundException();}
+		Car car = (Car)exists.get();
 		//make sure factory has all the needed parts
 		for(Part p : car.getCarParts()) {
 			if(!inventory.containsKey(p)) {
@@ -61,9 +57,7 @@ public class CarFactory extends Factory implements IReceive{
 		}
 		
 		//build the cars
-		for(Part p : car.getCarParts()) {
-			inventory.put(p, inventory.get(p)-o.getQuantity());
-		}
+		car.getCarParts().forEach(p-> inventory.put(p, inventory.get(p)-o.getQuantity()));
 		
 		o.getClient().receive(car, o.getQuantity());
 		

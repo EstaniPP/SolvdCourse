@@ -75,11 +75,7 @@ public abstract class Factory {
 	
 	//director salary plus departements salaries
 	public double calculateSalaries() {
-		Double salaries = ceo.getSalary();
-		for(Department d : departments) {
-			salaries += d.calculateSalaries();
-		}
-		return salaries;
+		return ceo.getSalary() + departments.stream().mapToDouble(d -> d.calculateSalaries()).sum();
 	}
 	
 	public ArrayList<Product> getProducts() {
@@ -92,11 +88,7 @@ public abstract class Factory {
 	public abstract void produce(Order o) throws Exception;
 	
 	public Integer getEmployeesQuantity() {
-		Integer departmentQty = 0;
-		for(Department d :departments) {
-			departmentQty += d.getEmployeesQuantity();
-		}
-		return (ceo.getStatus().isStillInFactory() ? 1 : 0) + departmentQty;
+		return (ceo.getStatus().isStillInFactory() ? 1 : 0) + departments.stream().mapToInt(d -> d.getEmployeesQuantity()).sum();
 	}
 	
 }

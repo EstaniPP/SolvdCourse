@@ -88,9 +88,7 @@ public abstract class Car extends Product {
 		Double price = 0.0d;
 		try {
 			ArrayList<Part> parts = this.getCarParts();
-			for(Part p: parts) {
-				price+=p.getPrice();
-			}
+			price = parts.stream().mapToDouble(p -> p.getPrice()).sum();
 		}catch(CarNoPartsException e) {
 			LOGGER.error(e);
 		}

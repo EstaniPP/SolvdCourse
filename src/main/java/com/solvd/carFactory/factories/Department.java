@@ -48,19 +48,11 @@ public class Department {
 	}
 	
 	public double calculateSalaries() {
-		Double salaries = departmentDirector.getSalary();
-		for(Employee e : employees) {
-			salaries += e.getSalary();
-		}
-		return salaries;
+		return departmentDirector.getSalary() + employees.stream().mapToDouble(d -> d.getSalary()).sum();
 	}
 
 	public Integer getEmployeesQuantity() {
-		Integer quantity = departmentDirector.getStatus().isStillInFactory() ? 1 : 0;
-		for(Employee e : employees) {
-			quantity += e.getStatus().isStillInFactory() ? 1 : 0;
-		}
-		return quantity;
+		return departmentDirector.getStatus().isStillInFactory() ? 1 : 0 + employees.stream().mapToInt(e -> e.getStatus().isStillInFactory() ? 1 : 0).sum();
 	}
 	
 	public void setName(String name) {
