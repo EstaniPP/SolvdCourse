@@ -20,13 +20,7 @@ public class ConnectionThread implements Runnable{
 		try {
 			conn = cp.getConnection();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		try {
-			wait(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 		LOGGER.info("Thread:" + name + " connection: " + conn);
 		cp.releaseConnection(conn);

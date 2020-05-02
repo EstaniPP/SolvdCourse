@@ -8,9 +8,11 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class fileTestRunner {
-	
+public class FileTestRunner {
+	private final static Logger LOGGER = LogManager.getLogger(FileTestRunner.class);
 	public static void main(String[] args) {
 		HashMap<String,Integer> words = new HashMap<String,Integer>();
 		try {
@@ -21,7 +23,7 @@ public class fileTestRunner {
 			//Save HashMap strings in another file call results
 			FileUtils.writeStringToFile(new File("../CarFactory/src/main/resources/results.txt"), words.toString(), StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 	}
 }

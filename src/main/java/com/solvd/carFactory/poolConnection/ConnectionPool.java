@@ -7,12 +7,14 @@ public class ConnectionPool {
 
 	
 	private static ConnectionPool cp;
-	public static final Integer CONNECTIONSSIZE = 5;
-	private BlockingQueue<String> connectionQueue; 
+	public static final Integer CONNECTIONS_SIZE = 5;
+	private BlockingQueue<String> connectionQueue;
+	private Integer connectionsCreated;
 	
 	
 	private ConnectionPool(){
-		initConnections();
+		connectionQueue = new LinkedBlockingQueue<String>(CONNECTIONS_SIZE);
+		connectionsCreated = 0;
 	}
 
 	public static ConnectionPool getInstance(){
@@ -26,14 +28,17 @@ public class ConnectionPool {
 		return cp;
 	}
 	
-	private void initConnections() {
-		connectionQueue = new LinkedBlockingQueue<String>(CONNECTIONSSIZE);
-		for(int i=1; i<=CONNECTIONSSIZE; i++) {
-			connectionQueue.add(new String("Conn "+i));
-		}
+	private void initConnection() {
+		connectionQueue.add(new String("Conn "+(++connectionsCreated)));
 	}
 	
 	public String getConnection() throws InterruptedException{
+		if(connectionQueue.size() > 0) {
+			return connectionQueue.take();
+		}
+		if(connectionsCreated < CONNECTIONS_SIZE) {
+			initConnection();
+		}
 		return connectionQueue.take();
 	}
 	

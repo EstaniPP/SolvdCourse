@@ -7,9 +7,9 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class poolConnectionRunner {
+public class PoolConnectionRunner {
 
-	private final static Logger LOGGER = LogManager.getLogger(poolConnectionRunner.class);
+	private final static Logger LOGGER = LogManager.getLogger(PoolConnectionRunner.class);
 	public static void main(String[] args) {
 		ConnectionPool cp = ConnectionPool.getInstance();
 		ExecutorService executor = Executors.newFixedThreadPool(7);
@@ -21,7 +21,7 @@ public class poolConnectionRunner {
 			executor.awaitTermination(10, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 		LOGGER.info("Finish");
 	}
