@@ -37,7 +37,9 @@ public class ConnectionPool {
 			return connectionQueue.take();
 		}
 		if(connectionsCreated < CONNECTIONS_SIZE) {
-			initConnection();
+			synchronized(ConnectionPool.class) {
+				if(connectionsCreated < CONNECTIONS_SIZE) initConnection();
+			}
 		}
 		return connectionQueue.take();
 	}
