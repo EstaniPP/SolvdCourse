@@ -1,9 +1,9 @@
 --INSERTS--
 
-insert into Companies (name, phone_number, e-mail) values (‘StarBucks’, '+54-2234834688', 'starbucks@mail.com');
-insert into Companies (name, phone_number, e-mail) values (‘McDonalds’, '+54-2236721345', 'mcdonalds@mail.com');
+insert into Companies (name, phone_number, email) values (‘StarBucks’, '+54-2234834688', 'starbucks@mail.com');
+insert into Companies (name, phone_number, email) values (‘McDonalds’, '+54-2236721345', 'mcdonalds@mail.com');
 
-insert into Shops (company_id, address, phone_number, e-mail) values (1,'StarBucksShop', '+54-2234834688', 'starbucksshop@mail.com');
+insert into Shops (company_id, address, phone_number, email) values (1,'StarBucksShop', '+54-2234834688', 'starbucksshop@mail.com');
 
 insert into Products (shop_id, description, size_width, size_height) values (1, 'Grey Tea', 10, 10);
 insert into Products (shop_id, description, size_width, size_height) values (1, 'SmallCoffee', 10, 7);
@@ -19,7 +19,7 @@ insert into Orders (vehicle_id, costumer_id, address_id, employee_id, price, dat
 
 insert into Address (costumer_id, address, city, estate, postal_code) values (1, 'AV9 number 1344', 'Tandil', 'Buenos Aires', '7607');
 
-insert into Costumers (first_name, last_name, e-mail, birth_date) values ('Perez Pena', 'Estanislao', 'estanipp@gmail.com', '1997-04-29');
+insert into Costumers (first_name, last_name, email, birth_date) values ('Perez Pena', 'Estanislao', 'estanipp@gmail.com', '1997-04-29');
 
 --DELETES--
 
