@@ -1,0 +1,5 @@
+2020-05-05 09:56:31 INFO  Runner:125 - [Employee: Worker salary 90.0, Employee: headWorker salary 95.0, Employee: DepCeo salary 100.0, Employee: CEO salary 1000.0]
+2020-05-05 09:56:31 INFO  Runner:142 - [Employee: CEO salary 1000.0, Employee: DepCeo salary 100.0, Employee: Worker salary 90.0, Employee: headWorker salary 95.0]
+2020-05-05 09:56:31 INFO  Runner:144 - [Employee: CEO salary 1000.0, Employee: DepCeo salary 100.0, Employee: headWorker salary 95.0, Employee: Worker salary 90.0]
+2020-05-05 09:56:31 INFO  Runner:151 - [Product id: 3 name: audiA1Chasis price: 12.0, Product id: 2 name: audiA1Motor price: 10.0, Product id: 1 name: audiA1 price: 44.0]
+2020-05-05 09:56:31 INFO  Runner:164 - [Product id: 2 name: audiA1Motor price: 10.0]
