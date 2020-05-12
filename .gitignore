@@ -5,3 +5,5 @@ target/
 .classpath
 
 .settings/
+
+.src/main/resources/logger.log
