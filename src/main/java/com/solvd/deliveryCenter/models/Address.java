@@ -3,7 +3,7 @@ package com.solvd.deliveryCenter.models;
 public class Address {
 
 	private Long id;
-	private Long costumerId;
+	private Long customerId;
 	private String address;
 	private String city;
 	private String estate;
@@ -25,8 +25,8 @@ public class Address {
 		this.estate = estate;
 	}
 	
-	public void setCostumerId(Long costumerId) {
-		this.costumerId = costumerId;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	
 	public void setCity(String city) {
@@ -49,8 +49,8 @@ public class Address {
 		return estate;
 	}
 	
-	public Long getCostumerId() {
-		return costumerId;
+	public Long getCustomerId() {
+		return customerId;
 	}
 	
 	public String getCity() {

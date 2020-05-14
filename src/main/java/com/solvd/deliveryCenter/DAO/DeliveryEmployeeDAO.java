@@ -27,10 +27,9 @@ public class DeliveryEmployeeDAO implements IEnitityDAO<DeliveryEmployee> {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
-				ps = c.prepareStatement("delete from Delivery_employees where id = ?");
-				ps.setString(1, id.toString());
+				ps = c.prepareStatement("delete from Addresses where id = ?");
+				ps.setLong(1, id);
 				ps.executeQuery();
-				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -42,6 +41,11 @@ public class DeliveryEmployeeDAO implements IEnitityDAO<DeliveryEmployee> {
 			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
 				conn.releaseConnection(c);
 			}
 	}
@@ -98,7 +102,7 @@ public class DeliveryEmployeeDAO implements IEnitityDAO<DeliveryEmployee> {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Delivery_employees where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
 				obj.setId(rs.getLong("employee_id"));
@@ -135,9 +139,10 @@ public class DeliveryEmployeeDAO implements IEnitityDAO<DeliveryEmployee> {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
-				ps = c.prepareStatement("insert into Delivery_employees (delivery_fee, drivers_license) values (?,?)");
-				ps.setString(1, entity.getDeliveryFee().toString());
-				ps.setString(2, entity.getLicense().toString());
+				ps = c.prepareStatement("insert into Delivery_employees (employee_id, delivery_fee, drivers_license) values (?,?,?)");
+				ps.setLong(1, entity.getEmployeeId());
+				ps.setLong(2, entity.getDeliveryFee());
+				ps.setString(3, entity.getLicense());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {
@@ -169,9 +174,9 @@ public class DeliveryEmployeeDAO implements IEnitityDAO<DeliveryEmployee> {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Delivery_employees set delivery_fee = ?, drivers_license = ? where employee_id = ?");
-				ps.setString(1, entity.getDeliveryFee().toString());
-				ps.setString(2, entity.getLicense().toString());
-				ps.setString(3, entity.getEmployeeId().toString());
+				ps.setLong(1, entity.getDeliveryFee());
+				ps.setString(2, entity.getLicense());
+				ps.setLong(3, entity.getEmployeeId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {

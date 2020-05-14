@@ -29,9 +29,8 @@ public class DepartmentDAO implements IEnitityDAO<Department>{
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Departments where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				ps.executeQuery();
-				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -43,6 +42,11 @@ public class DepartmentDAO implements IEnitityDAO<Department>{
 			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
 				conn.releaseConnection(c);
 			}
 	}
@@ -102,7 +106,7 @@ public class DepartmentDAO implements IEnitityDAO<Department>{
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Departments where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
 				obj.setId(rs.getLong("id"));
@@ -147,7 +151,7 @@ public class DepartmentDAO implements IEnitityDAO<Department>{
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getPhoneNumber());
 				ps.setString(4, entity.getEmail());
-				ps.setString(5, entity.getCeoId().toString());
+				ps.setLong(5, entity.getCeoId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {
@@ -183,8 +187,8 @@ public class DepartmentDAO implements IEnitityDAO<Department>{
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getPhoneNumber());
 				ps.setString(4, entity.getEmail());
-				ps.setString(5, entity.getCeoId().toString());
-				ps.setString(6, entity.getId().toString());
+				ps.setLong(5, entity.getCeoId());
+				ps.setLong(6, entity.getId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {

@@ -28,9 +28,8 @@ public class CompanyDAO implements IEnitityDAO<Company>{
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Companies where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				ps.executeQuery();
-				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -42,6 +41,11 @@ public class CompanyDAO implements IEnitityDAO<Company>{
 			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
 				conn.releaseConnection(c);
 			}
 	}
@@ -99,7 +103,7 @@ public class CompanyDAO implements IEnitityDAO<Company>{
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Companies where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
 				obj.setId(rs.getLong("id"));
@@ -137,7 +141,7 @@ public class CompanyDAO implements IEnitityDAO<Company>{
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
-				ps = c.prepareStatement("insert into Costumers (name, phone_number, email) values (?,?,?)");
+				ps = c.prepareStatement("insert into Companies (name, phone_number, email) values (?,?,?)");
 				ps.setString(1, entity.getName());
 				ps.setString(2, entity.getPhoneNumber());
 				ps.setString(3, entity.getEmail());
@@ -175,7 +179,7 @@ public class CompanyDAO implements IEnitityDAO<Company>{
 				ps.setString(1, entity.getName());
 				ps.setString(2, entity.getPhoneNumber());
 				ps.setString(3, entity.getEmail());
-				ps.setString(4, entity.getId().toString());
+				ps.setLong(4, entity.getId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {

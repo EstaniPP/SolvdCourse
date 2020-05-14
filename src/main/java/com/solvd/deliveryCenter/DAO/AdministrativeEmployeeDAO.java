@@ -28,10 +28,9 @@ public class AdministrativeEmployeeDAO implements IEnitityDAO<AdministrativeEmpl
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
-				ps = c.prepareStatement("delete from Administrative_employees where id = ?");
-				ps.setString(1, id.toString());
+				ps = c.prepareStatement("delete from Addresses where id = ?");
+				ps.setLong(1, id);
 				ps.executeQuery();
-				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -43,6 +42,11 @@ public class AdministrativeEmployeeDAO implements IEnitityDAO<AdministrativeEmpl
 			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
 				conn.releaseConnection(c);
 			}
 	}
@@ -98,7 +102,7 @@ public class AdministrativeEmployeeDAO implements IEnitityDAO<AdministrativeEmpl
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Administrative_employees where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
 				obj.setId(rs.getLong("employee_id"));
@@ -135,8 +139,8 @@ public class AdministrativeEmployeeDAO implements IEnitityDAO<AdministrativeEmpl
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Administrative_employees (employee_id, salary) values (?,?)");
-				ps.setString(1, entity.getEmployeeId().toString());
-				ps.setString(2, entity.getSalary().toString());
+				ps.setLong(1, entity.getEmployeeId());
+				ps.setDouble(2, entity.getSalary());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {
@@ -168,8 +172,8 @@ public class AdministrativeEmployeeDAO implements IEnitityDAO<AdministrativeEmpl
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Administrative_employees set salary = ?  where employee_id = ?");
-				ps.setString(1, entity.getSalary().toString());
-				ps.setString(2, entity.getEmployeeId().toString());
+				ps.setDouble(1, entity.getSalary());
+				ps.setLong(2, entity.getId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {

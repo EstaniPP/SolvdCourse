@@ -4,9 +4,6 @@ public class Vehicle {
 	private Long id;
 	private Long departmentId;
 	private String plate;
-	private String type;
-	private Integer secureCost;
-	private Integer plateCost;
 	private String model;
 	private Integer year;
 	
@@ -16,18 +13,6 @@ public class Vehicle {
 	
 	public void setYear(Integer year) {
 		this.year = year;
-	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public void setSecureCost(Integer secureCost) {
-		this.secureCost = secureCost;
-	}
-	
-	public void setPlateCost(Integer plateCost) {
-		this.plateCost = plateCost;
 	}
 	
 	public void setPlate(String plate) {
@@ -48,18 +33,6 @@ public class Vehicle {
 	
 	public Integer getYear() {
 		return year;
-	}
-	
-	public String getType() {
-		return type;
-	}
-	
-	public Integer getSecureCost() {
-		return secureCost;
-	}
-	
-	public Integer getPlateCost() {
-		return plateCost;
 	}
 	
 	public String getPlate() {

@@ -29,9 +29,8 @@ public class AddressDAO implements IEnitityDAO<Address>{
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				ps.executeQuery();
-				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -43,6 +42,11 @@ public class AddressDAO implements IEnitityDAO<Address>{
 			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
 				conn.releaseConnection(c);
 			}
 	}
@@ -62,7 +66,7 @@ public class AddressDAO implements IEnitityDAO<Address>{
 				while(rs.next()) {
 					Address a = new Address();
 					a.setId(rs.getLong("id"));
-					a.setCostumerId(rs.getLong("costumer_id"));
+					a.setCustomerId(rs.getLong("customer_id"));
 					a.setAddress(rs.getString("address"));
 					a.setCity(rs.getString("city"));
 					a.setEstate(rs.getString("estate"));
@@ -102,11 +106,11 @@ public class AddressDAO implements IEnitityDAO<Address>{
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Addresses where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
 				a.setId(rs.getLong("id"));
-				a.setCostumerId(rs.getLong("costumer_id"));
+				a.setCustomerId(rs.getLong("customer_id"));
 				a.setAddress(rs.getString("address"));
 				a.setCity(rs.getString("city"));
 				a.setEstate(rs.getString("estate"));
@@ -142,8 +146,8 @@ public class AddressDAO implements IEnitityDAO<Address>{
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
-				ps = c.prepareStatement("insert into Addresses (costumer_id, address, city, estate, postal_code) values (?,?,?,?,?)");
-				ps.setString(1, entity.getCostumerId().toString());
+				ps = c.prepareStatement("insert into Addresses (customer_id, address, city, estate, postal_code) values (?,?,?,?,?)");
+				ps.setLong(1, entity.getCustomerId());
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getCity());
 				ps.setString(4, entity.getEstate());
@@ -178,13 +182,13 @@ public class AddressDAO implements IEnitityDAO<Address>{
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Addresses set costumer_id = ?, address = ?, city = ?, estate = ?, postal_code = ?  where id = ?");
-				ps.setString(1, entity.getCostumerId().toString());
+				ps = c.prepareStatement("update from Addresses set customer_id = ?, address = ?, city = ?, estate = ?, postal_code = ?  where id = ?");
+				ps.setLong(1, entity.getCustomerId());
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getCity());
 				ps.setString(4, entity.getEstate());
-				ps.setString(5, entity.getPostalCode().toString());
-				ps.setString(6, entity.getCostumerId().toString());
+				ps.setString(5, entity.getPostalCode());
+				ps.setLong(6, entity.getId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {

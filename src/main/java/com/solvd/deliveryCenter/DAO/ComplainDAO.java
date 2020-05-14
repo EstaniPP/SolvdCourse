@@ -28,9 +28,8 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Complains where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				ps.executeQuery();
-				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -42,6 +41,11 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
 				conn.releaseConnection(c);
 			}
 	}
@@ -99,7 +103,7 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Complains where id = ?");
-				ps.setString(1, id.toString());
+				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
 				obj.setId(rs.getLong("id"));
@@ -138,9 +142,9 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Complains (order_id, description, date) values (?,?,?)");
-				ps.setString(1, entity.getOrderId().toString());
+				ps.setLong(1, entity.getOrderId());
 				ps.setString(2, entity.getDescription());
-				ps.setString(3, entity.getDate().toString());
+				ps.setDate(3, entity.getDate());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {
@@ -172,10 +176,10 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Complains set order_id = ?, description = ?, date = ? where id = ?");
-				ps.setString(1, entity.getOrderId().toString());
+				ps.setLong(1, entity.getOrderId());
 				ps.setString(2, entity.getDescription());
-				ps.setString(3, entity.getDate().toString());
-				ps.setString(4, entity.getId().toString());
+				ps.setDate(3, entity.getDate());
+				ps.setLong(4, entity.getId());
 				ps.executeQuery();
 				ps.close();
 			} catch (InterruptedException e) {

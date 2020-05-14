@@ -2,20 +2,20 @@ package com.solvd.deliveryCenter.models;
 
 import java.util.ArrayList;
 
-public class Costumer {
+public class Customer {
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private java.sql.Date birthDate;
 	private ArrayList<Address> addresses;
-	private ArrayList<CostumerPhoneNumber> phones;
+	private ArrayList<CustomerPhoneNumber> phones;
 	
-	public Costumer() {
+	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setPhones(ArrayList<CostumerPhoneNumber> phones) {
+	public void setPhones(ArrayList<CustomerPhoneNumber> phones) {
 		this.phones = phones;
 	}
 	
@@ -35,7 +35,7 @@ public class Costumer {
 		this.firstName = firstName;
 	}
 	
-	public ArrayList<CostumerPhoneNumber> getPhones() {
+	public ArrayList<CustomerPhoneNumber> getPhones() {
 		return phones;
 	}
 	

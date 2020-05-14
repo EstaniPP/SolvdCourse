@@ -6,7 +6,7 @@ public class Employee {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	private String email;
+	private Long departmentId;
 	private java.sql.Date birthDate;
 	private ArrayList<EmployeePhoneNumber> phones;
 	
@@ -30,10 +30,6 @@ public class Employee {
 		this.firstName = firstName;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 	public void setBirthDate(java.sql.Date birthDate) {
 		this.birthDate = birthDate;
 	}
@@ -54,11 +50,15 @@ public class Employee {
 		return firstName;
 	}
 	
-	public String getEmail() {
-		return email;
-	}
-	
 	public java.sql.Date getBirthDate() {
 		return birthDate;
+	}
+	
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
+	}
+	
+	public Long getDepartmentId() {
+		return departmentId;
 	}
 }

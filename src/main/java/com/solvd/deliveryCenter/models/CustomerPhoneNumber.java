@@ -1,15 +1,15 @@
 package com.solvd.deliveryCenter.models;
 
-public class CostumerPhoneNumber {
+public class CustomerPhoneNumber {
 	private Long id;
 	private String phoneNumber;
-	private Long costumerId;
+	private Long customerId;
 	
-	public CostumerPhoneNumber() {
+	public CustomerPhoneNumber() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setPhones(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
@@ -17,8 +17,8 @@ public class CostumerPhoneNumber {
 		this.id = id;
 	}
 	
-	public void setCostumerId(Long costumerId) {
-		this.costumerId = costumerId;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	
 	public String getPhones() {
@@ -29,7 +29,7 @@ public class CostumerPhoneNumber {
 		return id;
 	}
 	
-	public Long getCostumerId() {
-		return costumerId;
+	public Long getCustomerId() {
+		return customerId;
 	}
 }
