@@ -14,7 +14,7 @@ import com.solvd.deliveryCenter.models.AdministrativeEmployee;
 import com.solvd.deliveryCenter.models.Employee;
 import com.solvd.deliveryCenter.models.DeliveryEmployee;
 
-public class EmployeeDAO implements IEmployeeDAO{
+public class EmployeeDAO implements IEntityDAO<Employee>{
 	private final static Logger LOGGER = LogManager.getLogger(EmployeeDAO.class);
 	
 	public EmployeeDAO() {
@@ -22,7 +22,7 @@ public class EmployeeDAO implements IEmployeeDAO{
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -96,7 +96,7 @@ public class EmployeeDAO implements IEmployeeDAO{
 	}
 	
 	@Override
-	public Employee getEntityByID(Integer id) {
+	public Employee getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;
@@ -207,85 +207,4 @@ public class EmployeeDAO implements IEmployeeDAO{
 				conn.releaseConnection(c);
 			}
 	}
-
-	@Override
-	public void setDeliveryEmployeeValues(DeliveryEmployee de) {
-		ConnectionPool conn = ConnectionPool.getInstance();
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				c= conn.getConnection();
-				ps = c.prepareStatement("select * from Employees where id = ?");
-				ps.setLong(1, de.getEmployeeId());
-				rs = ps.executeQuery();
-				rs.next();
-				de.setId(rs.getLong("id"));
-				de.setBirthDate(rs.getDate("birth_date"));
-				de.setDepartmentId(rs.getLong("department_id"));
-				de.setFirstName(rs.getString("first_name"));
-				de.setLastName(rs.getString("last_name"));
-				ps.close();
-			} catch (InterruptedException e) {
-				LOGGER.error(e);
-			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
-				LOGGER.error(e);
-			} finally {
-				try {
-					rs.close();
-					ps.close();
-				} catch (SQLException e) {
-					LOGGER.error(e);
-				}
-				conn.releaseConnection(c);
-			}
-	}
-
-	@Override
-	public void setAdministrativeEmployeeValues(AdministrativeEmployee ae) {
-		ConnectionPool conn = ConnectionPool.getInstance();
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				c= conn.getConnection();
-				ps = c.prepareStatement("select * from Employees where id = ?");
-				ps.setLong(1, ae.getEmployeeId());
-				rs = ps.executeQuery();
-				rs.next();
-				ae.setId(rs.getLong("id"));
-				ae.setBirthDate(rs.getDate("birth_date"));
-				ae.setDepartmentId(rs.getLong("department_id"));
-				ae.setFirstName(rs.getString("first_name"));
-				ae.setLastName(rs.getString("last_name"));
-				ps.close();
-			} catch (InterruptedException e) {
-				LOGGER.error(e);
-			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
-				LOGGER.error(e);
-			} finally {
-				try {
-					rs.close();
-					ps.close();
-				} catch (SQLException e) {
-					LOGGER.error(e);
-				}
-				conn.releaseConnection(c);
-			}
-	}
-	
 }

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Customer;
 
-public class CustomerDAO implements IEnitityDAO<Customer>{
+public class CustomerDAO implements IEntityDAO<Customer>{
 	private final static Logger LOGGER = LogManager.getLogger(CustomerDAO.class);
 	
 	public CustomerDAO() {
@@ -20,7 +20,7 @@ public class CustomerDAO implements IEnitityDAO<Customer>{
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -94,7 +94,7 @@ public class CustomerDAO implements IEnitityDAO<Customer>{
 	}
 	
 	@Override
-	public Customer getEntityByID(Integer id) {
+	public Customer getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;

@@ -10,6 +10,7 @@ public class Order {
 	private Integer price;
 	private java.sql.Date date;
 	private ArrayList<ProductInOrder> products;
+	private Complain complain;
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
@@ -70,4 +71,12 @@ public class Order {
 	public Long getAddressId() {
 		return addressId;
 	}	
+	
+	public Complain getComplain() {
+		return complain;
+	}
+	
+	public void setComplain(Complain complain) {
+		this.complain = complain;
+	}
 }

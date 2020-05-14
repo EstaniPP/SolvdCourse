@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.ProductInOrder;
 
-public class ProductInOrderDAO implements IEnitityDAO<ProductInOrder> {
+public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 	private final static Logger LOGGER = LogManager.getLogger(ProductInOrderDAO.class);
 	
 	public ProductInOrderDAO() {
@@ -20,7 +20,7 @@ public class ProductInOrderDAO implements IEnitityDAO<ProductInOrder> {
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -93,7 +93,7 @@ public class ProductInOrderDAO implements IEnitityDAO<ProductInOrder> {
 	}
 	
 	@Override
-	public ProductInOrder getEntityByID(Integer id) {
+	public ProductInOrder getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;

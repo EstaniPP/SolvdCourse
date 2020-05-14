@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Vehicle;
 
-public class VehicleDAO implements IEnitityDAO<Vehicle>{
+public class VehicleDAO implements IEntityDAO<Vehicle>{
 	private final static Logger LOGGER = LogManager.getLogger(VehicleDAO.class);
 	
 	public VehicleDAO() {
@@ -20,7 +20,7 @@ public class VehicleDAO implements IEnitityDAO<Vehicle>{
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -93,7 +93,7 @@ public class VehicleDAO implements IEnitityDAO<Vehicle>{
 	}
 	
 	@Override
-	public Vehicle getEntityByID(Integer id) {
+	public Vehicle getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;

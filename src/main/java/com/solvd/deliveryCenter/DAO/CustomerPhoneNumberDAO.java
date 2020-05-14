@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.CustomerPhoneNumber;
 
-public class CustomerPhoneNumberDAO implements IEnitityDAO<CustomerPhoneNumber> {
+public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 	private final static Logger LOGGER = LogManager.getLogger(CustomerPhoneNumberDAO.class);
 	
 	public CustomerPhoneNumberDAO() {
@@ -20,7 +20,7 @@ public class CustomerPhoneNumberDAO implements IEnitityDAO<CustomerPhoneNumber> 
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -92,7 +92,7 @@ public class CustomerPhoneNumberDAO implements IEnitityDAO<CustomerPhoneNumber> 
 	}
 	
 	@Override
-	public CustomerPhoneNumber getEntityByID(Integer id) {
+	public CustomerPhoneNumber getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;
@@ -196,6 +196,48 @@ public class CustomerPhoneNumberDAO implements IEnitityDAO<CustomerPhoneNumber> 
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public ArrayList<CustomerPhoneNumber> getPhonesByCustomerID(Long id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<CustomerPhoneNumber> list = new ArrayList<CustomerPhoneNumber>();
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Customer_phone_numbers where customer_id = ?");
+				ps.setLong(1, id);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					CustomerPhoneNumber obj = new CustomerPhoneNumber();
+					obj.setId(rs.getLong("id"));
+					obj.setCustomerId(rs.getLong("customer_id"));
+					obj.setPhoneNumber(rs.getString("phone"));
+					list.add(obj);
+				}
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return list;
 	}
 	
 }

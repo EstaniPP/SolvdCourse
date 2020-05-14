@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Product;
 
-public class ProductDAO implements IEnitityDAO<Product>{
+public class ProductDAO implements IProductDAO{
 	private final static Logger LOGGER = LogManager.getLogger(ProductDAO.class);
 	
 	public ProductDAO() {
@@ -20,7 +20,7 @@ public class ProductDAO implements IEnitityDAO<Product>{
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -93,7 +93,7 @@ public class ProductDAO implements IEnitityDAO<Product>{
 	}
 	
 	@Override
-	public Product getEntityByID(Integer id) {
+	public Product getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;
@@ -203,6 +203,49 @@ public class ProductDAO implements IEnitityDAO<Product>{
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public ArrayList<Product> getProductsByShopId(Long id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Products where shop_id = ?");
+				ps.setLong(1, id);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Product obj = new Product();
+					obj.setId(rs.getLong("shop_id"));
+					obj.setDescription(rs.getString("description"));
+					obj.setHeight(rs.getInt("size_height"));
+					obj.setWidth(rs.getInt("size_width"));
+					list.add(obj);
+				}
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return list;
 	}
 	
 }

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Complain;
 
-public class ComplainDAO implements IEnitityDAO<Complain> {
+public class ComplainDAO implements IComplainDAO {
 	private final static Logger LOGGER = LogManager.getLogger(ComplainDAO.class);
 	
 	public ComplainDAO() {
@@ -20,7 +20,7 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 	}
 	
 	@Override
-	public void deleteEntityByID(Integer id) {
+	public void deleteEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null; 
 		PreparedStatement ps = null;
@@ -93,7 +93,7 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 	}
 	
 	@Override
-	public Complain getEntityByID(Integer id) {
+	public Complain getEntityByID(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;
@@ -200,6 +200,49 @@ public class ComplainDAO implements IEnitityDAO<Complain> {
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public Complain getComplainByOrderID(Long id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Complain obj = null;
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Complains where order_id = ?");
+				ps.setLong(1, id);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					obj = new Complain();
+					obj.setId(rs.getLong("id"));
+					obj.setOrderId(rs.getLong("order_id"));
+					obj.setDescription(rs.getString("description"));
+					obj.setDate(rs.getDate("date"));
+				}
+				ps.close();
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return obj;
 	}
 	
 }
