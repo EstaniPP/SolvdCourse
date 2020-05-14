@@ -25,4 +25,16 @@ public class Complain {
 	public Long getOrderId() {
 		return orderId;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public java.sql.Date getDate() {
+		return date;
+	}
 }

@@ -3,6 +3,7 @@ package com.solvd.deliveryCenter.models;
 import java.util.ArrayList;
 
 public class DeliveryEmployee extends Employee{
+	private Long employeeId;
 	private Long deliveryFee;
 	private String License;
 	private ArrayList<Order> orders;
@@ -33,5 +34,21 @@ public class DeliveryEmployee extends Employee{
 	
 	public ArrayList<Order> getOrder() {
 		return orders;
+	}
+	
+	public void setOrders(ArrayList<Order> orders) {
+		this.orders = orders;
+	}
+	
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
+	
+	public ArrayList<Order> getOrders() {
+		return orders;
+	}
+	
+	public Long getEmployeeId() {
+		return employeeId;
 	}
 }

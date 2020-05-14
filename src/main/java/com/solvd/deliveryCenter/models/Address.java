@@ -1,4 +1,4 @@
-ackage com.solvd.deliveryCenter.models;
+package com.solvd.deliveryCenter.models;
 
 public class Address {
 

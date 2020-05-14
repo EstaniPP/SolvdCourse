@@ -40,6 +40,7 @@ public class ConnectionPool {
 	private void initConnection() {
 		try {
 			connectionQueue.add(DriverManager.getConnection(url,user,password));
+			connectionsCreated++;
 		} catch (SQLException e) {
 			LOGGER.error(e);
 		}

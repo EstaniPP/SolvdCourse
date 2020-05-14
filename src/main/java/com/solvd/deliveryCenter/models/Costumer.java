@@ -62,4 +62,12 @@ public class Costumer {
 	public String getLastName() {
 		return lastName;
 	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public java.sql.Date getBirthDate() {
+		return birthDate;
+	}
 }

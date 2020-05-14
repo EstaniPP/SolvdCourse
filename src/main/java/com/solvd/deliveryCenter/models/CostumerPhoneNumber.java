@@ -3,7 +3,7 @@ package com.solvd.deliveryCenter.models;
 public class CostumerPhoneNumber {
 	private Long id;
 	private String phoneNumber;
-	private Integer costumerId;
+	private Long costumerId;
 	
 	public CostumerPhoneNumber() {
 		// TODO Auto-generated constructor stub
@@ -17,7 +17,7 @@ public class CostumerPhoneNumber {
 		this.id = id;
 	}
 	
-	public void setCostumerId(Integer costumerId) {
+	public void setCostumerId(Long costumerId) {
 		this.costumerId = costumerId;
 	}
 	
@@ -29,7 +29,7 @@ public class CostumerPhoneNumber {
 		return id;
 	}
 	
-	public Integer getCostumerId() {
+	public Long getCostumerId() {
 		return costumerId;
 	}
 }

@@ -1,5 +1,202 @@
 package com.solvd.deliveryCenter.DAO;
 
-public class BusinessHourDAO {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
+import com.solvd.deliveryCenter.models.BusinessHour;
+
+public class BusinessHourDAO implements IEnitityDAO<BusinessHour> {
+	
+	private final static Logger LOGGER = LogManager.getLogger(BusinessHourDAO.class);
+	
+	public BusinessHourDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void deleteEntityByID(Integer id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null; 
+		PreparedStatement ps = null;
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("delete from Business_hours where id = ?");
+				ps.setString(1, id.toString());
+				ps.executeQuery();
+				ps.close();
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				conn.releaseConnection(c);
+			}
+	}
+	
+	@Override
+	public ArrayList<BusinessHour> getAllEntities() {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<BusinessHour> list = new ArrayList<BusinessHour>();
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Business_hours");
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					BusinessHour obj = new BusinessHour();
+					obj.setId(rs.getLong("id"));
+					obj.setShopId(rs.getLong("shopId"));
+					obj.setDay(rs.getString("day"));
+					obj.setHour(rs.getTime("shopId"));
+					list.add(obj);
+				}
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return list;
+	}
+	
+	@Override
+	public BusinessHour getEntityByID(Integer id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		BusinessHour obj = new BusinessHour();
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Business_hours where id = ?");
+				ps.setString(1, id.toString());
+				rs = ps.executeQuery();
+				rs.next();
+				obj.setId(rs.getLong("id"));
+				obj.setShopId(rs.getLong("shopId"));
+				obj.setDay(rs.getString("day"));
+				obj.setHour(rs.getTime("shopId"));
+				ps.close();
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return obj;
+	}
+	
+	@Override
+	public void saveEntity(BusinessHour entity) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null; 
+		PreparedStatement ps = null;
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("insert into Business_hours (shop_id, day, hour) values (?,?,?)");
+				ps.setString(1, entity.getShopId().toString());
+				ps.setString(2, entity.getDay().toString());
+				ps.setString(3, entity.getHour().toString());
+				ps.executeQuery();
+				ps.close();
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+	}
+	
+	@Override
+	public void updateEntity(BusinessHour entity) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null; 
+		PreparedStatement ps = null;
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				c= conn.getConnection();
+				ps = c.prepareStatement("update from Business_hours set shop_id = ?, day = ?, hour = ?  where id = ?");
+				ps.setString(1, entity.getShopId().toString());
+				ps.setString(2, entity.getDay().toString());
+				ps.setString(3, entity.getHour().toString());
+				ps.setString(4, entity.getId().toString());
+				ps.executeQuery();
+				ps.close();
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} catch (InstantiationException e) {
+				LOGGER.error(e);
+			} catch (IllegalAccessException e) {
+				LOGGER.error(e);
+			} catch (ClassNotFoundException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+	}
+	
 }
