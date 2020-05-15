@@ -25,7 +25,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Products_in_orders where id = ?");
 				ps.setLong(1, id);
@@ -33,12 +32,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -58,7 +51,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 		ResultSet rs = null;
 		ArrayList<ProductInOrder> list = new ArrayList<ProductInOrder>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Products_in_orders");
 				rs = ps.executeQuery();
@@ -73,12 +65,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -100,7 +86,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 		ResultSet rs = null;
 		ProductInOrder obj = new ProductInOrder();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Products_in_orders where id = ?");
 				ps.setLong(1, id);
@@ -114,12 +99,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -139,7 +118,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Products_in_orders (order_id, product_id, quantity) values (?,?,?)");
 				ps.setLong(1, entity.getOrderId());
@@ -150,12 +128,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -173,7 +145,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Products_in_orders set order_id = ?, description = ?, date = ? where id = ?");
 				ps.setLong(1, entity.getOrderId());
@@ -185,12 +156,6 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

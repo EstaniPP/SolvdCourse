@@ -25,7 +25,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Customer_phone_numbers where id = ?");
 				ps.setLong(1, id);
@@ -33,12 +32,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -58,7 +51,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		ResultSet rs = null;
 		ArrayList<CustomerPhoneNumber> list = new ArrayList<CustomerPhoneNumber>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Customer_phone_numbers");
 				rs = ps.executeQuery();
@@ -72,12 +64,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -99,7 +85,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		ResultSet rs = null;
 		CustomerPhoneNumber obj = new CustomerPhoneNumber();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Customer_phone_numbers where id = ?");
 				ps.setLong(1, id);
@@ -112,12 +97,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -137,7 +116,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Customer_phone_numbers (phone, customer_id) values (?,?)");
 				ps.setString(1, entity.getPhones());
@@ -147,12 +125,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -170,7 +142,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Customer_phone_numbers set phone = ?, employee_id = ? where id = ?");
 				ps.setString(1, entity.getPhones());
@@ -181,12 +152,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -206,7 +171,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		ResultSet rs = null;
 		ArrayList<CustomerPhoneNumber> list = new ArrayList<CustomerPhoneNumber>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Customer_phone_numbers where customer_id = ?");
 				ps.setLong(1, id);
@@ -221,12 +185,6 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

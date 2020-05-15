@@ -25,7 +25,6 @@ public class ComplainDAO implements IComplainDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Complains where id = ?");
 				ps.setLong(1, id);
@@ -33,12 +32,6 @@ public class ComplainDAO implements IComplainDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -58,7 +51,6 @@ public class ComplainDAO implements IComplainDAO {
 		ResultSet rs = null;
 		ArrayList<Complain> list = new ArrayList<Complain>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Complains");
 				rs = ps.executeQuery();
@@ -73,12 +65,6 @@ public class ComplainDAO implements IComplainDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -100,7 +86,6 @@ public class ComplainDAO implements IComplainDAO {
 		ResultSet rs = null;
 		Complain obj = new Complain();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Complains where id = ?");
 				ps.setLong(1, id);
@@ -114,12 +99,6 @@ public class ComplainDAO implements IComplainDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -139,7 +118,6 @@ public class ComplainDAO implements IComplainDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Complains (order_id, description, date) values (?,?,?)");
 				ps.setLong(1, entity.getOrderId());
@@ -150,12 +128,6 @@ public class ComplainDAO implements IComplainDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -173,7 +145,6 @@ public class ComplainDAO implements IComplainDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Complains set order_id = ?, description = ?, date = ? where id = ?");
 				ps.setLong(1, entity.getOrderId());
@@ -185,12 +156,6 @@ public class ComplainDAO implements IComplainDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -210,7 +175,6 @@ public class ComplainDAO implements IComplainDAO {
 		ResultSet rs = null;
 		Complain obj = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Complains where order_id = ?");
 				ps.setLong(1, id);
@@ -226,12 +190,6 @@ public class ComplainDAO implements IComplainDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

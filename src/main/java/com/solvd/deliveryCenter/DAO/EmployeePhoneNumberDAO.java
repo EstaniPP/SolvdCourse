@@ -26,7 +26,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Employee_phone_numbers where id = ?");
 				ps.setLong(1, id);
@@ -34,12 +33,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -59,7 +52,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		ResultSet rs = null;
 		ArrayList<EmployeePhoneNumber> list = new ArrayList<EmployeePhoneNumber>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Employee_phone_numbers");
 				rs = ps.executeQuery();
@@ -73,12 +65,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -100,7 +86,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		ResultSet rs = null;
 		EmployeePhoneNumber obj = new EmployeePhoneNumber();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Employee_phone_numbers where id = ?");
 				ps.setLong(1, id);
@@ -113,12 +98,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -138,7 +117,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Employee_phone_numbers (phone, employee_id) values (?,?)");
 				ps.setString(1, entity.getPhoneNumber());
@@ -148,12 +126,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -171,7 +143,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Employee_phone_numbers set phone = ?, employee_id = ? where id = ?");
 				ps.setString(1, entity.getPhoneNumber());
@@ -182,12 +153,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -207,7 +172,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		ResultSet rs = null;
 		ArrayList<EmployeePhoneNumber> list = new ArrayList<EmployeePhoneNumber>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Employee_phone_numbers where employee_id = ?");
 				ps.setLong(1, id);
@@ -222,12 +186,6 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

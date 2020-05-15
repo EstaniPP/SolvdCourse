@@ -25,7 +25,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
 				ps.setLong(1, id);
@@ -33,12 +32,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -58,7 +51,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 		ResultSet rs = null;
 		ArrayList<DeliveryEmployee> list = new ArrayList<DeliveryEmployee>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Delivery_employees");
 				rs = ps.executeQuery();
@@ -72,12 +64,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -99,7 +85,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 		ResultSet rs = null;
 		DeliveryEmployee obj = new DeliveryEmployee();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Delivery_employees where id = ?");
 				ps.setLong(1, id);
@@ -112,12 +97,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -137,7 +116,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Delivery_employees (employee_id, delivery_fee, drivers_license) values (?,?,?)");
 				ps.setLong(1, entity.getEmployeeId());
@@ -148,12 +126,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -171,7 +143,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Delivery_employees set delivery_fee = ?, drivers_license = ? where employee_id = ?");
 				ps.setLong(1, entity.getDeliveryFee());
@@ -182,12 +153,6 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

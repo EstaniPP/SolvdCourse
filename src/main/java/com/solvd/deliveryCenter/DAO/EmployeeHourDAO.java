@@ -26,7 +26,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Employees_hours where id = ?");
 				ps.setLong(1, id);
@@ -34,12 +33,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -59,7 +52,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		ResultSet rs = null;
 		ArrayList<EmployeeHour> list = new ArrayList<EmployeeHour>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Employees_hours");
 				rs = ps.executeQuery();
@@ -74,12 +66,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -101,7 +87,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		ResultSet rs = null;
 		EmployeeHour obj = new EmployeeHour();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Employees_hours where id = ?");
 				ps.setLong(1, id);
@@ -115,12 +100,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -140,7 +119,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Employees_hours (employee_id, day, hour) values (?,?,?)");
 				ps.setLong(1, entity.getEmployeeId());
@@ -151,12 +129,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -174,7 +146,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Employees_hours set employee_id = ?, day = ?, hour = ?  where id = ?");
 				ps.setLong(1, entity.getEmployeeId());
@@ -186,12 +157,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -211,7 +176,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		ResultSet rs = null;
 		ArrayList<EmployeeHour> list = new ArrayList<EmployeeHour>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Employees_hours where employee_id = ?");
 				ps.setLong(1, id);
@@ -227,12 +191,6 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

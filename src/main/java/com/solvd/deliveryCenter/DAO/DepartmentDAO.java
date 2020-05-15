@@ -26,7 +26,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Departments where id = ?");
 				ps.setLong(1, id);
@@ -34,12 +33,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -59,7 +52,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		ResultSet rs = null;
 		ArrayList<Department> list = new ArrayList<Department>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Departments");
 				rs = ps.executeQuery();
@@ -76,12 +68,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -103,7 +89,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		ResultSet rs = null;
 		Department obj = new Department();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Departments where id = ?");
 				ps.setLong(1, id);
@@ -119,12 +104,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -144,7 +123,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Departments (especialization, address, phone_number, email, ceo_id) values (?,?,?,?,?)");
 				ps.setString(1, entity.getEspecialization());
@@ -157,12 +135,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -180,7 +152,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Departments set especialization = ?, address = ?, phone_number = ?, email = ?, ceo_id = ?  where id = ?");
 				ps.setString(1, entity.getEspecialization());
@@ -194,12 +165,6 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

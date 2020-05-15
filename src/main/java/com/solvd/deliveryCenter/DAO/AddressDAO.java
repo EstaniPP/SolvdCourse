@@ -26,7 +26,7 @@ public class AddressDAO implements IAddressDAO{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
 				ps.setLong(1, id);
@@ -34,12 +34,6 @@ public class AddressDAO implements IAddressDAO{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -59,7 +53,7 @@ public class AddressDAO implements IAddressDAO{
 		ResultSet rs = null;
 		ArrayList<Address> addresses = new ArrayList<Address>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Addresses");
 				rs = ps.executeQuery();
@@ -76,12 +70,6 @@ public class AddressDAO implements IAddressDAO{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -103,7 +91,7 @@ public class AddressDAO implements IAddressDAO{
 		ResultSet rs = null;
 		Address a = new Address();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Addresses where id = ?");
 				ps.setLong(1, id);
@@ -120,13 +108,7 @@ public class AddressDAO implements IAddressDAO{
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
-				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
 					ps.close();
@@ -144,7 +126,7 @@ public class AddressDAO implements IAddressDAO{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Addresses (customer_id, address, city, estate, postal_code) values (?,?,?,?,?)");
 				ps.setLong(1, entity.getCustomerId());
@@ -157,12 +139,6 @@ public class AddressDAO implements IAddressDAO{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -180,7 +156,7 @@ public class AddressDAO implements IAddressDAO{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Addresses set customer_id = ?, address = ?, city = ?, estate = ?, postal_code = ?  where id = ?");
 				ps.setLong(1, entity.getCustomerId());
@@ -194,12 +170,6 @@ public class AddressDAO implements IAddressDAO{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -219,7 +189,7 @@ public class AddressDAO implements IAddressDAO{
 		ResultSet rs = null;
 		ArrayList<Address> addresses = new ArrayList<Address>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Addresses where customer_id = ?");
 				ps.setLong(1, id);
@@ -237,12 +207,6 @@ public class AddressDAO implements IAddressDAO{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

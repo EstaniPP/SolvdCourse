@@ -26,7 +26,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
 				ps.setLong(1, id);
@@ -34,12 +34,6 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -59,7 +53,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 		ResultSet rs = null;
 		ArrayList<AdministrativeEmployee> list = new ArrayList<AdministrativeEmployee>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Administrative_employees");
 				rs = ps.executeQuery();
@@ -72,12 +66,6 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -99,7 +87,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 		ResultSet rs = null;
 		AdministrativeEmployee obj = new AdministrativeEmployee();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Administrative_employees where id = ?");
 				ps.setLong(1, id);
@@ -111,12 +99,6 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -136,7 +118,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Administrative_employees (employee_id, salary) values (?,?)");
 				ps.setLong(1, entity.getEmployeeId());
@@ -146,12 +128,6 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -169,7 +145,6 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Administrative_employees set salary = ?  where employee_id = ?");
 				ps.setDouble(1, entity.getSalary());
@@ -180,13 +155,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
-				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					ps.close();
 				} catch (SQLException e) {

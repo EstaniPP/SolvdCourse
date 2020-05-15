@@ -25,7 +25,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Shops where id = ?");
 				ps.setLong(1, id);
@@ -33,12 +32,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -58,7 +51,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 		ResultSet rs = null;
 		ArrayList<Shop> list = new ArrayList<Shop>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Shops");
 				rs = ps.executeQuery();
@@ -73,12 +65,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -100,7 +86,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 		ResultSet rs = null;
 		Shop obj = new Shop();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Shops where id = ?");
 				ps.setLong(1, id);
@@ -115,12 +100,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -140,7 +119,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Shops (company_id, address, phone_number, email) values (?,?,?,?)");
 				ps.setLong(1, entity.getCompanyId());
@@ -152,12 +130,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -175,7 +147,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Shops set company_id = ?, address = ?, phone_number = ?, email = ? where id = ?");
 				ps.setLong(1, entity.getCompanyId());
@@ -188,12 +159,6 @@ public class ShopDAO implements IEntityDAO<Shop>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

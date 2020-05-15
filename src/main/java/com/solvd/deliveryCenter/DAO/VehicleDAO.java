@@ -25,7 +25,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Vehicles where id = ?");
 				ps.setLong(1, id);
@@ -33,12 +32,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -58,7 +51,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 		ResultSet rs = null;
 		ArrayList<Vehicle> list = new ArrayList<Vehicle>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Vehicles");
 				rs = ps.executeQuery();
@@ -73,12 +65,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -100,7 +86,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 		ResultSet rs = null;
 		Vehicle obj = new Vehicle();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Vehicles where id = ?");
 				ps.setLong(1, id);
@@ -115,12 +100,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -140,7 +119,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Vehicles (department_id, plate, model, year) values (?,?,?,?)");
 				ps.setLong(1, entity.getDepartmentId());
@@ -152,12 +130,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -175,7 +147,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Vehicles set department_id = ?, plate = ?, model = ?, year = ? where id = ?");
 				ps.setLong(1, entity.getDepartmentId());
@@ -188,12 +159,6 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {

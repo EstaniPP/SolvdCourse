@@ -26,7 +26,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Business_hours where id = ?");
 				ps.setLong(1, id);
@@ -34,12 +33,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -59,7 +52,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 		ResultSet rs = null;
 		ArrayList<BusinessHour> list = new ArrayList<BusinessHour>();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Business_hours");
 				rs = ps.executeQuery();
@@ -74,12 +66,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -101,7 +87,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 		ResultSet rs = null;
 		BusinessHour obj = new BusinessHour();
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("select * from Business_hours where id = ?");
 				ps.setLong(1, id);
@@ -115,12 +100,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -140,7 +119,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Business_hours (shop_id, day, hour) values (?,?,?)");
 				ps.setLong(1, entity.getShopId());
@@ -151,12 +129,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
@@ -174,7 +146,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 		Connection c = null; 
 		PreparedStatement ps = null;
 			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				c= conn.getConnection();
 				ps = c.prepareStatement("update from Business_hours set shop_id = ?, day = ?, hour = ?  where id = ?");
 				ps.setLong(1, entity.getShopId());
@@ -186,12 +157,6 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
-				LOGGER.error(e);
-			} catch (InstantiationException e) {
-				LOGGER.error(e);
-			} catch (IllegalAccessException e) {
-				LOGGER.error(e);
-			} catch (ClassNotFoundException e) {
 				LOGGER.error(e);
 			} finally {
 				try {
