@@ -29,7 +29,7 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Business_hours where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -124,7 +124,7 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 				ps.setLong(1, entity.getShopId());
 				ps.setString(2, entity.getDay());
 				ps.setTime(3, entity.getHour());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -152,7 +152,7 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 				ps.setString(2, entity.getDay());
 				ps.setTime(3, entity.getHour());
 				ps.setLong(4, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

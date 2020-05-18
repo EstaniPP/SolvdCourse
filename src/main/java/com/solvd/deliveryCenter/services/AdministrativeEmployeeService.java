@@ -26,7 +26,7 @@ public class AdministrativeEmployeeService {
 		public ArrayList<AdministrativeEmployee> getAllAdministrativeEmployees() {
 			ArrayList<AdministrativeEmployee> list = aEmployeeDAO.getAllEntities();
 			list.stream().forEach(obj -> obj.setSchedule(employeeHours.getHoursByEmployeeId(obj.getEmployeeId())));
-			list.stream().forEach(obj -> obj.setPhones(employeePhones.getHoursByEmployeeId(obj.getEmployeeId())));
+			list.stream().forEach(obj -> obj.setPhones(employeePhones.getPhoneNumbersByEmployeeId(obj.getEmployeeId())));
 			for(AdministrativeEmployee emp : list) {
 				Employee employee = employeeDAO.getEntityByID(emp.getEmployeeId());
 				emp.setBirthDate(employee.getBirthDate());
@@ -41,7 +41,7 @@ public class AdministrativeEmployeeService {
 		public AdministrativeEmployee getAdministrativeEmployeeById(Long id) {
 			AdministrativeEmployee emp = aEmployeeDAO.getEntityByID(id);
 			emp.setSchedule(employeeHours.getHoursByEmployeeId(emp.getEmployeeId()));
-			emp.setPhones(employeePhones.getHoursByEmployeeId(emp.getEmployeeId()));
+			emp.setPhones(employeePhones.getPhoneNumbersByEmployeeId(emp.getEmployeeId()));
 			Employee employee = employeeDAO.getEntityByID(emp.getEmployeeId());
 			emp.setBirthDate(employee.getBirthDate());
 			emp.setDepartmentId(employee.getDepartmentId());
@@ -51,5 +51,17 @@ public class AdministrativeEmployeeService {
 			return emp;
 		}
 		
+		public void saveAdministrativeEmployee(AdministrativeEmployee e) {
+			aEmployeeDAO.saveEntity(e);
+			employeeDAO.saveEntity(e);
+		}
 		
+		public void deleteAdministrativeEmployee(AdministrativeEmployee e) {
+			employeeDAO.deleteEntityByID(e.getEmployeeId());
+		}
+		
+		public void updateAdministrativeEmployee(AdministrativeEmployee e) {
+			employeeDAO.updateEntity(e);
+			aEmployeeDAO.updateEntity(e);
+		}
 }

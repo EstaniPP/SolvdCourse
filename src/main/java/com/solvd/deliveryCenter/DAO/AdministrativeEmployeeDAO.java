@@ -30,7 +30,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -123,7 +123,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				ps = c.prepareStatement("insert into Administrative_employees (employee_id, salary) values (?,?)");
 				ps.setLong(1, entity.getEmployeeId());
 				ps.setDouble(2, entity.getSalary());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -149,7 +149,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				ps = c.prepareStatement("update from Administrative_employees set salary = ?  where employee_id = ?");
 				ps.setDouble(1, entity.getSalary());
 				ps.setLong(2, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

@@ -10,9 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
-import com.solvd.deliveryCenter.models.AdministrativeEmployee;
 import com.solvd.deliveryCenter.models.Employee;
-import com.solvd.deliveryCenter.models.DeliveryEmployee;
 
 public class EmployeeDAO implements IEntityDAO<Employee>{
 	private final static Logger LOGGER = LogManager.getLogger(EmployeeDAO.class);
@@ -30,7 +28,7 @@ public class EmployeeDAO implements IEntityDAO<Employee>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Employees where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -128,7 +126,7 @@ public class EmployeeDAO implements IEntityDAO<Employee>{
 				ps.setString(2, entity.getLastName());
 				ps.setLong(3, entity.getDepartmentId());
 				ps.setDate(4, entity.getBirthDate());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -157,7 +155,7 @@ public class EmployeeDAO implements IEntityDAO<Employee>{
 				ps.setLong(3, entity.getDepartmentId());
 				ps.setDate(4, entity.getBirthDate());
 				ps.setLong(5, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

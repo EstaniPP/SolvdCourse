@@ -28,7 +28,7 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Products_in_orders where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -123,7 +123,7 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 				ps.setLong(1, entity.getOrderId());
 				ps.setLong(2, entity.getProductId());
 				ps.setLong(3, entity.getQuantity());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -151,7 +151,7 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 				ps.setLong(2, entity.getProductId());
 				ps.setLong(3, entity.getQuantity());
 				ps.setLong(4, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

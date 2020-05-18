@@ -28,7 +28,7 @@ public class ProductDAO implements IProductDAO{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Products where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -125,7 +125,7 @@ public class ProductDAO implements IProductDAO{
 				ps.setString(2, entity.getDescription());
 				ps.setInt(3, entity.getWidth());
 				ps.setInt(4, entity.getHeight());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -154,7 +154,7 @@ public class ProductDAO implements IProductDAO{
 				ps.setInt(3, entity.getWidth());
 				ps.setInt(4, entity.getHeight());
 				ps.setLong(5, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

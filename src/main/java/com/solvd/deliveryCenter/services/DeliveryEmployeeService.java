@@ -10,18 +10,18 @@ import com.solvd.deliveryCenter.models.Employee;
 
 public class DeliveryEmployeeService {
 		private EmployeeDAO employeeDAO;
-		private DeliveryEmployeeDAO aEmployeeDAO;
-		private EmployeePhoneNumberDAO employeePhones;
+		private DeliveryEmployeeDAO deliveryEmployeeDAO;
+		private EmployeePhoneNumberDAO employeePhonesDAO;
 		
 		public DeliveryEmployeeService() {
-			aEmployeeDAO = new DeliveryEmployeeDAO();
+			deliveryEmployeeDAO = new DeliveryEmployeeDAO();
 			employeeDAO = new EmployeeDAO();
-			employeePhones = new EmployeePhoneNumberDAO();
+			employeePhonesDAO = new EmployeePhoneNumberDAO();
 		}
 		
 		public ArrayList<DeliveryEmployee> getAllDeliveryEmployee() {
-			ArrayList<DeliveryEmployee> list = aEmployeeDAO.getAllEntities();
-			list.stream().forEach(obj -> obj.setPhones(employeePhones.getHoursByEmployeeId(obj.getEmployeeId())));
+			ArrayList<DeliveryEmployee> list = deliveryEmployeeDAO.getAllEntities();
+			list.stream().forEach(obj -> obj.setPhones(employeePhonesDAO.getPhoneNumbersByEmployeeId(obj.getEmployeeId())));
 			for(DeliveryEmployee emp : list) {
 				Employee employee = employeeDAO.getEntityByID(emp.getEmployeeId());
 				emp.setBirthDate(employee.getBirthDate());
@@ -34,8 +34,8 @@ public class DeliveryEmployeeService {
 		}
 		
 		public DeliveryEmployee getDeliveryEmployeeById(Long id) {
-			DeliveryEmployee emp = aEmployeeDAO.getEntityByID(id);
-			emp.setPhones(employeePhones.getHoursByEmployeeId(emp.getEmployeeId()));
+			DeliveryEmployee emp = deliveryEmployeeDAO.getEntityByID(id);
+			emp.setPhones(employeePhonesDAO.getPhoneNumbersByEmployeeId(emp.getEmployeeId()));
 			Employee employee = employeeDAO.getEntityByID(emp.getEmployeeId());
 			emp.setBirthDate(employee.getBirthDate());
 			emp.setDepartmentId(employee.getDepartmentId());
@@ -45,5 +45,18 @@ public class DeliveryEmployeeService {
 			return emp;
 		}
 		
+		public void saveDeliveryEmployee(DeliveryEmployee e) {
+			deliveryEmployeeDAO.saveEntity(e);
+			employeeDAO.saveEntity(e);
+		}
+		
+		public void deleteDeliveryEmployee(DeliveryEmployee e) {
+			employeeDAO.deleteEntityByID(e.getEmployeeId());
+		}
+		
+		public void updateDeliveryEmployee(DeliveryEmployee e) {
+			employeeDAO.updateEntity(e);
+			deliveryEmployeeDAO.updateEntity(e);
+		}
 		
 }

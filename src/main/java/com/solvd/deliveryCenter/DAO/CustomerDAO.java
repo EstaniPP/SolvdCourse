@@ -28,7 +28,7 @@ public class CustomerDAO implements IEntityDAO<Customer>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Customers where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.execute();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -126,7 +126,7 @@ public class CustomerDAO implements IEntityDAO<Customer>{
 				ps.setString(2, entity.getLastName());
 				ps.setString(3, entity.getEmail());
 				ps.setDate(4, entity.getBirthDate());
-				ps.executeQuery();
+				ps.execute();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -155,7 +155,7 @@ public class CustomerDAO implements IEntityDAO<Customer>{
 				ps.setString(3, entity.getEmail());
 				ps.setDate(4, entity.getBirthDate());
 				ps.setLong(5, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

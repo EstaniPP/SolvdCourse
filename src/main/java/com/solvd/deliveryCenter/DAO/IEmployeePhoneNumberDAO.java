@@ -6,6 +6,6 @@ import com.solvd.deliveryCenter.models.EmployeePhoneNumber;
 
 public interface IEmployeePhoneNumberDAO extends IEntityDAO<EmployeePhoneNumber>{
 
-	ArrayList<EmployeePhoneNumber> getHoursByEmployeeId (Long id);
+	ArrayList<EmployeePhoneNumber> getPhoneNumbersByEmployeeId (Long id);
 	
 }

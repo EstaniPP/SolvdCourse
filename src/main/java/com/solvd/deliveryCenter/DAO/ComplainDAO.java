@@ -28,7 +28,7 @@ public class ComplainDAO implements IComplainDAO {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Complains where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -123,7 +123,7 @@ public class ComplainDAO implements IComplainDAO {
 				ps.setLong(1, entity.getOrderId());
 				ps.setString(2, entity.getDescription());
 				ps.setDate(3, entity.getDate());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -151,7 +151,7 @@ public class ComplainDAO implements IComplainDAO {
 				ps.setString(2, entity.getDescription());
 				ps.setDate(3, entity.getDate());
 				ps.setLong(4, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

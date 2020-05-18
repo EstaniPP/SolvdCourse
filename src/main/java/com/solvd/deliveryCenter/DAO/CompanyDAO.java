@@ -28,7 +28,7 @@ public class CompanyDAO implements IEntityDAO<Company>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Companies where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -123,7 +123,7 @@ public class CompanyDAO implements IEntityDAO<Company>{
 				ps.setString(1, entity.getName());
 				ps.setString(2, entity.getPhoneNumber());
 				ps.setString(3, entity.getEmail());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -151,7 +151,7 @@ public class CompanyDAO implements IEntityDAO<Company>{
 				ps.setString(2, entity.getPhoneNumber());
 				ps.setString(3, entity.getEmail());
 				ps.setLong(4, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

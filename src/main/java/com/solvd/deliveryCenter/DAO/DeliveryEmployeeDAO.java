@@ -28,7 +28,7 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -121,7 +121,7 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 				ps.setLong(1, entity.getEmployeeId());
 				ps.setLong(2, entity.getDeliveryFee());
 				ps.setString(3, entity.getLicense());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -148,7 +148,7 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 				ps.setLong(1, entity.getDeliveryFee());
 				ps.setString(2, entity.getLicense());
 				ps.setLong(3, entity.getEmployeeId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

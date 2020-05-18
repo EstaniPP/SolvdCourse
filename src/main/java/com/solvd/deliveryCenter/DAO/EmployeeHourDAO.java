@@ -29,7 +29,7 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Employees_hours where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -124,7 +124,7 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 				ps.setLong(1, entity.getEmployeeId());
 				ps.setString(2, entity.getDay());
 				ps.setTime(3, entity.getHour());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -152,7 +152,7 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 				ps.setString(2, entity.getDay());
 				ps.setTime(3, entity.getHour());
 				ps.setLong(4, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

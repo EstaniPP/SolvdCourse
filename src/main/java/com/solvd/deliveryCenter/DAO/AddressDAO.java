@@ -30,7 +30,7 @@ public class AddressDAO implements IAddressDAO{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Addresses where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.execute();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -134,7 +134,7 @@ public class AddressDAO implements IAddressDAO{
 				ps.setString(3, entity.getCity());
 				ps.setString(4, entity.getEstate());
 				ps.setString(5, entity.getPostalCode());
-				ps.executeQuery();
+				ps.execute();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -165,7 +165,7 @@ public class AddressDAO implements IAddressDAO{
 				ps.setString(4, entity.getEstate());
 				ps.setString(5, entity.getPostalCode());
 				ps.setLong(6, entity.getId());
-				ps.executeQuery();
+				ps.execute();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

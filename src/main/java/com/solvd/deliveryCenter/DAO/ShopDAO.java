@@ -28,7 +28,7 @@ public class ShopDAO implements IEntityDAO<Shop>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Shops where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -125,7 +125,7 @@ public class ShopDAO implements IEntityDAO<Shop>{
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getPhoneNumber());
 				ps.setString(4, entity.getEmail());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -154,7 +154,7 @@ public class ShopDAO implements IEntityDAO<Shop>{
 				ps.setString(3, entity.getPhoneNumber());
 				ps.setString(4, entity.getEmail());
 				ps.setLong(5, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

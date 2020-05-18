@@ -29,7 +29,7 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Departments where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -130,7 +130,7 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 				ps.setString(3, entity.getPhoneNumber());
 				ps.setString(4, entity.getEmail());
 				ps.setLong(5, entity.getCeoId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -160,7 +160,7 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 				ps.setString(4, entity.getEmail());
 				ps.setLong(5, entity.getCeoId());
 				ps.setLong(6, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

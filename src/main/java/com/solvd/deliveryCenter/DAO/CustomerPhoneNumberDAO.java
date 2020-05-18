@@ -28,7 +28,7 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Customer_phone_numbers where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -120,7 +120,7 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 				ps = c.prepareStatement("insert into Customer_phone_numbers (phone, customer_id) values (?,?)");
 				ps.setString(1, entity.getPhones());
 				ps.setLong(2, entity.getCustomerId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -147,7 +147,7 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 				ps.setString(1, entity.getPhones());
 				ps.setLong(2, entity.getCustomerId());
 				ps.setLong(3, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

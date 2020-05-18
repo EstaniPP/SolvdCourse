@@ -29,7 +29,7 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Employee_phone_numbers where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -121,7 +121,7 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 				ps = c.prepareStatement("insert into Employee_phone_numbers (phone, employee_id) values (?,?)");
 				ps.setString(1, entity.getPhoneNumber());
 				ps.setLong(2, entity.getEmployeeId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -148,7 +148,7 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 				ps.setString(1, entity.getPhoneNumber());
 				ps.setLong(2, entity.getEmployeeId());
 				ps.setLong(3, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -165,7 +165,7 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 	}
 
 	@Override
-	public ArrayList<EmployeePhoneNumber> getHoursByEmployeeId(Long id) {
+	public ArrayList<EmployeePhoneNumber> getPhoneNumbersByEmployeeId(Long id) {
 		ConnectionPool conn = ConnectionPool.getInstance();
 		Connection c = null;
 		PreparedStatement ps = null;

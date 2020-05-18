@@ -17,9 +17,9 @@ public class ConnectionPool {
 	private Integer connectionsSize = 5;
 	private BlockingQueue<Connection> connectionQueue;
 	private Integer connectionsCreated;
-	private String url = "";
-	private String user = "";
-	private String password = "";
+	private String url = "jdbc:mysql://127.0.0.1:33060/mydb?useSSL=false";
+	private String user = "root";
+	private String password = "1111";
 
 	private ConnectionPool(){
 		connectionQueue = new LinkedBlockingQueue<Connection>(connectionsSize);
@@ -39,9 +39,12 @@ public class ConnectionPool {
 	
 	private void initConnection() {
 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connectionQueue.add(DriverManager.getConnection(url,user,password));
 			connectionsCreated++;
 		} catch (SQLException e) {
+			LOGGER.error(e);
+		} catch (ClassNotFoundException e) {
 			LOGGER.error(e);
 		}
 	}

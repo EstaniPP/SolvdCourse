@@ -28,7 +28,7 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Vehicles where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -125,7 +125,7 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 				ps.setString(2, entity.getPlate());
 				ps.setString(3, entity.getModel());
 				ps.setLong(4, entity.getYear());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -154,7 +154,7 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 				ps.setString(3, entity.getModel());
 				ps.setLong(4, entity.getYear());
 				ps.setLong(5, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);

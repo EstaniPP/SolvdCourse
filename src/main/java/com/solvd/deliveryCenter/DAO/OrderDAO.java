@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Order;
 
-public class OrderDAO  implements IEntityDAO<Order>{
+public class OrderDAO  implements IOrderDAO{
 
 	private final static Logger LOGGER = LogManager.getLogger(OrderDAO.class);
 	
@@ -29,7 +29,7 @@ public class OrderDAO  implements IEntityDAO<Order>{
 				c= conn.getConnection();
 				ps = c.prepareStatement("delete from Orders where id = ?");
 				ps.setLong(1, id);
-				ps.executeQuery();
+				ps.executeUpdate();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -130,7 +130,7 @@ public class OrderDAO  implements IEntityDAO<Order>{
 				ps.setLong(3, entity.getEmployeeId());
 				ps.setLong(4, entity.getPrice());
 				ps.setDate(5, entity.getDate());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -160,7 +160,7 @@ public class OrderDAO  implements IEntityDAO<Order>{
 				ps.setLong(4, entity.getPrice());
 				ps.setDate(5, entity.getDate());
 				ps.setLong(6, entity.getId());
-				ps.executeQuery();
+				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -175,5 +175,118 @@ public class OrderDAO  implements IEntityDAO<Order>{
 				conn.releaseConnection(c);
 			}
 	}
-	
+
+	@Override
+	public ArrayList<Order> getAllOrdersByAddressID(Long id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Order> list = new ArrayList<Order>();
+			try {
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Orders where address_id = ?");
+				ps.setLong(1, id);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Order obj = new Order();
+					obj.setId(rs.getLong("id"));
+					obj.setVehicleId(rs.getLong("vehicle_id"));
+					obj.setAddressId(rs.getLong("address_id"));
+					obj.setEmployeeId(rs.getLong("employee_id"));
+					obj.setPrice(rs.getInt("price"));
+					obj.setDate(rs.getDate("date"));
+					list.add(obj);
+				}
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return list;
+	}
+
+	@Override
+	public ArrayList<Order> getAllOrdersByVehicleID(Long id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Order> list = new ArrayList<Order>();
+			try {
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Orders where vehicle_id = ?");
+				ps.setLong(1, id);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Order obj = new Order();
+					obj.setId(rs.getLong("id"));
+					obj.setVehicleId(rs.getLong("vehicle_id"));
+					obj.setAddressId(rs.getLong("address_id"));
+					obj.setEmployeeId(rs.getLong("employee_id"));
+					obj.setPrice(rs.getInt("price"));
+					obj.setDate(rs.getDate("date"));
+					list.add(obj);
+				}
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return list;
+	}
+
+	@Override
+	public ArrayList<Order> getAllOrdersByEmployeeID(Long id) {
+		ConnectionPool conn = ConnectionPool.getInstance();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Order> list = new ArrayList<Order>();
+			try {
+				c= conn.getConnection();
+				ps = c.prepareStatement("select * from Orders where employee_id = ?");
+				ps.setLong(1, id);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					Order obj = new Order();
+					obj.setId(rs.getLong("id"));
+					obj.setVehicleId(rs.getLong("vehicle_id"));
+					obj.setAddressId(rs.getLong("address_id"));
+					obj.setEmployeeId(rs.getLong("employee_id"));
+					obj.setPrice(rs.getInt("price"));
+					obj.setDate(rs.getDate("date"));
+					list.add(obj);
+				}
+			} catch (InterruptedException e) {
+				LOGGER.error(e);
+			} catch (SQLException e) {
+				LOGGER.error(e);
+			} finally {
+				try {
+					rs.close();
+					ps.close();
+				} catch (SQLException e) {
+					LOGGER.error(e);
+				}
+				conn.releaseConnection(c);
+			}
+			return list;
+	}
 }
