@@ -144,7 +144,7 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Employee_phone_numbers set phone = ?, employee_id = ? where id = ?");
+				ps = c.prepareStatement("update Employee_phone_numbers set phone = ?, employee_id = ? where id = ?");
 				ps.setString(1, entity.getPhoneNumber());
 				ps.setLong(2, entity.getEmployeeId());
 				ps.setLong(3, entity.getId());

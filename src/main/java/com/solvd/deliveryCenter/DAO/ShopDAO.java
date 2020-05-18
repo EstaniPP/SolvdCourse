@@ -148,7 +148,7 @@ public class ShopDAO implements IEntityDAO<Shop>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Shops set company_id = ?, address = ?, phone_number = ?, email = ? where id = ?");
+				ps = c.prepareStatement("update Shops set company_id = ?, address = ?, phone_number = ?, email = ? where id = ?");
 				ps.setLong(1, entity.getCompanyId());
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getPhoneNumber());

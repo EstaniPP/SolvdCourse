@@ -149,7 +149,7 @@ public class CustomerDAO implements IEntityDAO<Customer>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Customers set first_name = ?, last_name = ?, email = ?, birth_date = ?  where id = ?");
+				ps = c.prepareStatement("update Customers set first_name = ?, last_name = ?, email = ?, birth_date = ?  where id = ?");
 				ps.setString(1, entity.getFirstName());
 				ps.setString(2, entity.getLastName());
 				ps.setString(3, entity.getEmail());

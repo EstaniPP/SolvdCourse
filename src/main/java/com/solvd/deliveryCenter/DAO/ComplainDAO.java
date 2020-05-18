@@ -146,7 +146,7 @@ public class ComplainDAO implements IComplainDAO {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Complains set order_id = ?, description = ?, date = ? where id = ?");
+				ps = c.prepareStatement("update Complains set order_id = ?, description = ?, date = ? where id = ?");
 				ps.setLong(1, entity.getOrderId());
 				ps.setString(2, entity.getDescription());
 				ps.setDate(3, entity.getDate());

@@ -146,7 +146,7 @@ public class CompanyDAO implements IEntityDAO<Company>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Companies set name = ?, phone_number = ?, email = ? where id = ?");
+				ps = c.prepareStatement("update Companies set name = ?, phone_number = ?, email = ? where id = ?");
 				ps.setString(1, entity.getName());
 				ps.setString(2, entity.getPhoneNumber());
 				ps.setString(3, entity.getEmail());

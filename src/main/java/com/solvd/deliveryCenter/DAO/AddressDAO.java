@@ -158,7 +158,7 @@ public class AddressDAO implements IAddressDAO{
 			try {
 				
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Addresses set customer_id = ?, address = ?, city = ?, estate = ?, postal_code = ?  where id = ?");
+				ps = c.prepareStatement("update Addresses set customer_id = ?, address = ?, city = ?, estate = ?, postal_code = ?  where id = ?");
 				ps.setLong(1, entity.getCustomerId());
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getCity());

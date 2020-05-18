@@ -149,7 +149,7 @@ public class EmployeeDAO implements IEntityDAO<Employee>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Employees set first_name = ?, last_name = ?, department_id = ?, birth_date = ?  where id = ?");
+				ps = c.prepareStatement("update Employees set first_name = ?, last_name = ?, department_id = ?, birth_date = ?  where id = ?");
 				ps.setString(1, entity.getFirstName());
 				ps.setString(2, entity.getLastName());
 				ps.setLong(3, entity.getDepartmentId());

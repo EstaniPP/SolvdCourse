@@ -147,7 +147,7 @@ public class BusinessHourDAO implements IBusinessHourDAO {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Business_hours set shop_id = ?, day = ?, hour = ?  where id = ?");
+				ps = c.prepareStatement("update Business_hours set shop_id = ?, day = ?, hour = ?  where id = ?");
 				ps.setLong(1, entity.getShopId());
 				ps.setString(2, entity.getDay());
 				ps.setTime(3, entity.getHour());

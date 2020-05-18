@@ -124,12 +124,16 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("insert into Departments (especialization, address, phone_number, email, ceo_id) values (?,?,?,?,?)");
+				if(entity.getCeoId() != null) {
+					ps = c.prepareStatement("insert into Departments (especialization, address, phone_number, email, ceo_id) values (?,?,?,?,?)");
+					ps.setLong(5, entity.getCeoId());
+				}else {
+					ps = c.prepareStatement("insert into Departments (especialization, address, phone_number, email) values (?,?,?,?)");
+				}
 				ps.setString(1, entity.getEspecialization());
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getPhoneNumber());
 				ps.setString(4, entity.getEmail());
-				ps.setLong(5, entity.getCeoId());
 				ps.executeUpdate();
 				ps.close();
 			} catch (InterruptedException e) {
@@ -153,7 +157,7 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Departments set especialization = ?, address = ?, phone_number = ?, email = ?, ceo_id = ?  where id = ?");
+				ps = c.prepareStatement("update Departments set especialization = ?, address = ?, phone_number = ?, email = ?, ceo_id = ?  where id = ?");
 				ps.setString(1, entity.getEspecialization());
 				ps.setString(2, entity.getAddress());
 				ps.setString(3, entity.getPhoneNumber());

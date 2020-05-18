@@ -147,7 +147,7 @@ public class EmployeeHourDAO implements IEmployeeHourDAO {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Employees_hours set employee_id = ?, day = ?, hour = ?  where id = ?");
+				ps = c.prepareStatement("update Employees_hours set employee_id = ?, day = ?, hour = ?  where id = ?");
 				ps.setLong(1, entity.getEmployeeId());
 				ps.setString(2, entity.getDay());
 				ps.setTime(3, entity.getHour());

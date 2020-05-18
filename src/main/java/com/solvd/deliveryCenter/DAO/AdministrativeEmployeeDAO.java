@@ -59,7 +59,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				rs = ps.executeQuery();
 				while(rs.next()) {
 					AdministrativeEmployee a = new AdministrativeEmployee();
-					a.setId(rs.getLong("employee_id"));
+					a.setEmployeeId(rs.getLong("employee_id"));
 					a.setSalary(rs.getDouble("salary"));
 					list.add(a);
 				}
@@ -146,7 +146,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Administrative_employees set salary = ?  where employee_id = ?");
+				ps = c.prepareStatement("update Administrative_employees set salary = ?  where employee_id = ?");
 				ps.setDouble(1, entity.getSalary());
 				ps.setLong(2, entity.getId());
 				ps.executeUpdate();

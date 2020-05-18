@@ -148,7 +148,7 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Vehicles set department_id = ?, plate = ?, model = ?, year = ? where id = ?");
+				ps = c.prepareStatement("update Vehicles set department_id = ?, plate = ?, model = ?, year = ? where id = ?");
 				ps.setLong(1, entity.getDepartmentId());
 				ps.setString(2, entity.getPlate());
 				ps.setString(3, entity.getModel());

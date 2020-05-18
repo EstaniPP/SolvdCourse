@@ -153,7 +153,7 @@ public class OrderDAO  implements IOrderDAO{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Orders set vehicle_id = ?, address_id = ?, employee_id = ?, price =?, date =? where id = ?");
+				ps = c.prepareStatement("update Orders set vehicle_id = ?, address_id = ?, employee_id = ?, price =?, date =? where id = ?");
 				ps.setLong(1, entity.getVehicleId());
 				ps.setLong(2, entity.getAddressId());
 				ps.setLong(3, entity.getEmployeeId());

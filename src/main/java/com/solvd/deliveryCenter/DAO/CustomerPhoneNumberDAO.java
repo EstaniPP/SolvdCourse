@@ -143,7 +143,7 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Customer_phone_numbers set phone = ?, employee_id = ? where id = ?");
+				ps = c.prepareStatement("update Customer_phone_numbers set phone = ?, employee_id = ? where id = ?");
 				ps.setString(1, entity.getPhones());
 				ps.setLong(2, entity.getCustomerId());
 				ps.setLong(3, entity.getId());

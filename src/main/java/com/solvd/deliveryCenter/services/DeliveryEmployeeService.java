@@ -2,6 +2,7 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
+import com.solvd.deliveryCenter.DAO.DBInfoDAO;
 import com.solvd.deliveryCenter.DAO.DeliveryEmployeeDAO;
 import com.solvd.deliveryCenter.DAO.EmployeeDAO;
 import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
@@ -12,11 +13,13 @@ public class DeliveryEmployeeService {
 		private EmployeeDAO employeeDAO;
 		private DeliveryEmployeeDAO deliveryEmployeeDAO;
 		private EmployeePhoneNumberDAO employeePhonesDAO;
+		private DBInfoDAO dbinfo;
 		
 		public DeliveryEmployeeService() {
 			deliveryEmployeeDAO = new DeliveryEmployeeDAO();
 			employeeDAO = new EmployeeDAO();
 			employeePhonesDAO = new EmployeePhoneNumberDAO();
+			dbinfo = new DBInfoDAO();
 		}
 		
 		public ArrayList<DeliveryEmployee> getAllDeliveryEmployee() {
@@ -46,12 +49,13 @@ public class DeliveryEmployeeService {
 		}
 		
 		public void saveDeliveryEmployee(DeliveryEmployee e) {
-			deliveryEmployeeDAO.saveEntity(e);
 			employeeDAO.saveEntity(e);
+			e.setEmployeeId(dbinfo.getLastID());
+			deliveryEmployeeDAO.saveEntity(e);
 		}
 		
-		public void deleteDeliveryEmployee(DeliveryEmployee e) {
-			employeeDAO.deleteEntityByID(e.getEmployeeId());
+		public void deleteDeliveryEmployee(Long id) {
+			employeeDAO.deleteEntityByID(id);
 		}
 		
 		public void updateDeliveryEmployee(DeliveryEmployee e) {

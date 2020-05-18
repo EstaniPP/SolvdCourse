@@ -22,7 +22,7 @@ public class CustomerService {
 			customerPhones = new CustomerPhoneNumberDAO();
 		}
 		
-		public ArrayList<Customer> getCustomers() {
+		public ArrayList<Customer> getAllCustomers() {
 			ArrayList<Customer> customers = customerDAO.getAllEntities();
 			customers.stream().forEach(c -> c.setPhones(customerPhones.getPhonesByCustomerID(c.getId())));
 			customers.stream().forEach(c -> c.setAddresses(customerAddresses.getAddressesByCustomerID(c.getId())));
@@ -36,7 +36,7 @@ public class CustomerService {
 			return c;
 		}
 		
-		public void deleteCustomerByID(Long id) {
+		public void deleteCustomer(Long id) {
 			customerDAO.deleteEntityByID(id);
 		}
 		

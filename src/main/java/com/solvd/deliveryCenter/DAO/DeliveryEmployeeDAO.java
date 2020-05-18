@@ -144,7 +144,7 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Delivery_employees set delivery_fee = ?, drivers_license = ? where employee_id = ?");
+				ps = c.prepareStatement("update Delivery_employees set delivery_fee = ?, drivers_license = ? where employee_id = ?");
 				ps.setLong(1, entity.getDeliveryFee());
 				ps.setString(2, entity.getLicense());
 				ps.setLong(3, entity.getEmployeeId());

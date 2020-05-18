@@ -148,7 +148,7 @@ public class ProductDAO implements IProductDAO{
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Products set shop_id = ?, description = ?, size_width = ?, size_height = ?  where id = ?");
+				ps = c.prepareStatement("update Products set shop_id = ?, description = ?, size_width = ?, size_height = ?  where id = ?");
 				ps.setLong(1, entity.getShopId());
 				ps.setString(2, entity.getDescription());
 				ps.setInt(3, entity.getWidth());

@@ -3,6 +3,7 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.AdministrativeEmployeeDAO;
+import com.solvd.deliveryCenter.DAO.DBInfoDAO;
 import com.solvd.deliveryCenter.DAO.EmployeeDAO;
 import com.solvd.deliveryCenter.DAO.EmployeeHourDAO;
 import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
@@ -13,18 +14,20 @@ public class AdministrativeEmployeeService {
 	
 		private EmployeeHourDAO employeeHours;
 		private EmployeeDAO employeeDAO;
-		private AdministrativeEmployeeDAO aEmployeeDAO;
+		private AdministrativeEmployeeDAO administrativeEmployeeDAO;
 		private EmployeePhoneNumberDAO employeePhones;
+		private DBInfoDAO dbinfo;
 		
 		public AdministrativeEmployeeService() {
-			aEmployeeDAO = new AdministrativeEmployeeDAO();
+			administrativeEmployeeDAO = new AdministrativeEmployeeDAO();
 			employeeHours = new EmployeeHourDAO();
 			employeeDAO = new EmployeeDAO();
 			employeePhones = new EmployeePhoneNumberDAO();
+			dbinfo = new DBInfoDAO();
 		}
 		
 		public ArrayList<AdministrativeEmployee> getAllAdministrativeEmployees() {
-			ArrayList<AdministrativeEmployee> list = aEmployeeDAO.getAllEntities();
+			ArrayList<AdministrativeEmployee> list = administrativeEmployeeDAO.getAllEntities();
 			list.stream().forEach(obj -> obj.setSchedule(employeeHours.getHoursByEmployeeId(obj.getEmployeeId())));
 			list.stream().forEach(obj -> obj.setPhones(employeePhones.getPhoneNumbersByEmployeeId(obj.getEmployeeId())));
 			for(AdministrativeEmployee emp : list) {
@@ -39,7 +42,7 @@ public class AdministrativeEmployeeService {
 		}
 		
 		public AdministrativeEmployee getAdministrativeEmployeeById(Long id) {
-			AdministrativeEmployee emp = aEmployeeDAO.getEntityByID(id);
+			AdministrativeEmployee emp = administrativeEmployeeDAO.getEntityByID(id);
 			emp.setSchedule(employeeHours.getHoursByEmployeeId(emp.getEmployeeId()));
 			emp.setPhones(employeePhones.getPhoneNumbersByEmployeeId(emp.getEmployeeId()));
 			Employee employee = employeeDAO.getEntityByID(emp.getEmployeeId());
@@ -52,16 +55,17 @@ public class AdministrativeEmployeeService {
 		}
 		
 		public void saveAdministrativeEmployee(AdministrativeEmployee e) {
-			aEmployeeDAO.saveEntity(e);
 			employeeDAO.saveEntity(e);
+			e.setEmployeeId(dbinfo.getLastID());
+			administrativeEmployeeDAO.saveEntity(e);
 		}
 		
-		public void deleteAdministrativeEmployee(AdministrativeEmployee e) {
-			employeeDAO.deleteEntityByID(e.getEmployeeId());
+		public void deleteAdministrativeEmployee(Long id) {
+			employeeDAO.deleteEntityByID(id);
 		}
 		
 		public void updateAdministrativeEmployee(AdministrativeEmployee e) {
 			employeeDAO.updateEntity(e);
-			aEmployeeDAO.updateEntity(e);
+			administrativeEmployeeDAO.updateEntity(e);
 		}
 }

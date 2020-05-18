@@ -146,7 +146,7 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 		PreparedStatement ps = null;
 			try {
 				c= conn.getConnection();
-				ps = c.prepareStatement("update from Products_in_orders set order_id = ?, description = ?, date = ? where id = ?");
+				ps = c.prepareStatement("update Products_in_orders set order_id = ?, description = ?, date = ? where id = ?");
 				ps.setLong(1, entity.getOrderId());
 				ps.setLong(2, entity.getProductId());
 				ps.setLong(3, entity.getQuantity());
