@@ -3,6 +3,7 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.AddressDAO;
+import com.solvd.deliveryCenter.DAO.CustomerDAO;
 import com.solvd.deliveryCenter.DAO.OrderDAO;
 import com.solvd.deliveryCenter.models.Address;
 import com.solvd.deliveryCenter.models.Order;
@@ -11,6 +12,7 @@ public class AddressService {
 
 	private AddressDAO addressDAO;
 	private OrderDAO orderDAO;
+	private CustomerDAO customerDAO;
 	
 	public AddressService() {
 		addressDAO = new AddressDAO();
@@ -18,7 +20,9 @@ public class AddressService {
 	}
 	
 	public ArrayList<Address> getAllAdresses(){
-		return addressDAO.getAllEntities();
+		ArrayList<Address> list = addressDAO.getAllEntities();
+		list.stream().forEach(obj -> obj.setCustomer(customerDAO.getEntityByID(obj.getCustomerId())));
+		return list;
 	}
 	
 	public ArrayList<Address> getAllAdressesByCostumerID(Long id){

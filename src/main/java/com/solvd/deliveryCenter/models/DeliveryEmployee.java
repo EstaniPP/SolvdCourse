@@ -1,7 +1,5 @@
 package com.solvd.deliveryCenter.models;
 
-import java.util.ArrayList;
-
 public class DeliveryEmployee extends Employee{
 	private Long employeeId;
 	private Long deliveryFee;

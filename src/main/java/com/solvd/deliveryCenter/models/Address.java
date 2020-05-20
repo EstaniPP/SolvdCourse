@@ -8,6 +8,7 @@ public class Address {
 	private String city;
 	private String estate;
 	private String postalCode;
+	private Customer customer;
 	
 	public Address() {
 		// TODO Auto-generated constructor stub
@@ -59,5 +60,13 @@ public class Address {
 	
 	public String getAddress() {
 		return address;
+	}
+	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
 	}
 }

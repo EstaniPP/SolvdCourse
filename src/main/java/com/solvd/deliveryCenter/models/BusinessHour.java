@@ -5,6 +5,7 @@ public class BusinessHour {
 	private Long shopId;
 	private String day;
 	private java.sql.Time hour;
+	private Shop shop;
 	
 	public BusinessHour() {
 		// TODO Auto-generated constructor stub
@@ -40,5 +41,13 @@ public class BusinessHour {
 	
 	public String getDay() {
 		return day;
-	}	
+	}
+	
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+	
+	public Shop getShop() {
+		return shop;
+	}
 }

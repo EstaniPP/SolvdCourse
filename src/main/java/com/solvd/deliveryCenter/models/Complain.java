@@ -5,6 +5,7 @@ public class Complain {
 	private Long orderId;
 	private String description;
 	private java.sql.Date date;
+	private Order order;
 	
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
@@ -36,5 +37,13 @@ public class Complain {
 	
 	public java.sql.Date getDate() {
 		return date;
+	}
+	
+	public Order getOrder() {
+		return order;
+	}
+	
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 }

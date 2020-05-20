@@ -1,10 +1,12 @@
 package com.solvd.deliveryCenter;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.XMLParsers.XMLDepartmentParser;
 import com.solvd.deliveryCenter.models.Address;
 import com.solvd.deliveryCenter.models.AdministrativeEmployee;
 import com.solvd.deliveryCenter.models.Customer;
@@ -20,7 +22,7 @@ public class Runner {
 	private final static Logger LOGGER = LogManager.getLogger(Runner.class);
 	
 	public static void main(String[] args) {
-		CustomerService customerService = new CustomerService();
+		/*CustomerService customerService = new CustomerService();
 		Customer customer = new Customer();
 		customer.setBirthDate(Date.valueOf("1997-04-29"));
 		customer.setEmail("email@email.com");
@@ -87,7 +89,19 @@ public class Runner {
 		LOGGER.info("Administrative employee: "+ ae.getId() +" " + ae.getEmployeeId() +" "+ ae.getFirstName() +" "+ ae.getLastName() +" "+ ae.getDepartmentId() +" "+ ae.getSalary());
 		
 		aeService.getAllAdministrativeEmployees().forEach(obj -> aeService.deleteAdministrativeEmployee(obj.getId()));
-		dService.getAllDepartments().forEach(obj -> dService.deleteDepartment(obj.getId()));
+		dService.getAllDepartments().forEach(obj -> dService.deleteDepartment(obj.getId()));*/
+		
+		XMLDepartmentParser dep = new XMLDepartmentParser();
+		
+		ArrayList<Department> departments = dep.parseDepartments("src/main/resources/departments.xml");
+		
+		LOGGER.info(departments.size());
+		LOGGER.info(departments.get(0).getId());
+		LOGGER.info(departments.get(0).getVehicles().size());
+		LOGGER.info(departments.get(0).getVehicles().get(0).getDepartmentId());
+		LOGGER.info(departments.get(1).getAddress());
+		LOGGER.info(departments.get(1).getCeoId());
+		
 	}
 
 }

@@ -1,0 +1,30 @@
+<departments>
+	<department>
+		<id>1</id>
+		<ceoid>1</ceoid>
+		<address>hola</address>
+		<vehicles>
+			<vehicle departmentId ="0">
+			</vehicle>
+			<vehicle>
+			</vehicle>
+			<vehicle>
+			</vehicle>
+			<vehicle>
+			</vehicle>
+			<vehicle>
+			</vehicle>
+		</vehicles>
+	</department>
+	<department>
+		<id>1</id>
+		<ceoid>1</ceoid>
+		<address>hola2</address>
+		<vehicles>
+			<vehicle>
+			</vehicle>
+			<vehicle>
+			</vehicle>
+		</vehicles>
+	</department>
+</departments>
