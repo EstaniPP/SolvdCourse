@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.solvd.deliveryCenter.models.BusinessHour;
+import com.solvd.deliveryCenter.models.Company;
 import com.solvd.deliveryCenter.models.Shop;
 
 public class BusinessHourHandler  extends DefaultHandler {
@@ -21,7 +22,12 @@ public class BusinessHourHandler  extends DefaultHandler {
 	private static final String SHOPID = "shopId";
 	private static final String ADDRESS = "address";
     private static final String SHOPPHONENUMBER = "shopPhoneNumber";
-	private static final String SHOPEMAIL = "shopemail";		
+	private static final String SHOPEMAIL = "shopEmail";		
+	private static final String COMPANYID = "companyId";
+	private static final String COMPANYNAME = "companyName";
+	private static final String COMPANYPHONENUMBER = "companyPhoneNumber";
+	private static final String COMPANYEMAIL = "companyEmail";
+	private static final String COMPANY = "company";
 	   		 
     private ArrayList<BusinessHour> hours;
     private String elementValue;
@@ -55,6 +61,10 @@ public class BusinessHourHandler  extends DefaultHandler {
             	if(shopIndex == -1) hours.get(hours.size()-1).getShop().setPhoneNumber(attr.getValue(shopIndex));
             	shopIndex = attr.getIndex(SHOPEMAIL);
             	if(shopIndex == -1) hours.get(hours.size()-1).getShop().setEmail(attr.getValue(shopIndex));
+            	break;
+            case COMPANY:
+            	hours.get(hours.size()-1).getShop().setCompany(new Company());
+            	break;
         }
     }
  
@@ -69,8 +79,22 @@ public class BusinessHourHandler  extends DefaultHandler {
             	break;
             case DAY:
             	hours.get(hours.size()-1).setDay(elementValue);
+            	break;
             case SHOPID:
             	hours.get(hours.size()-1).setShopId(Long.valueOf(elementValue));
+            	break;
+            case COMPANYID:
+            	hours.get(hours.size()-1).getShop().getCompany().setId(Long.valueOf(elementValue));
+            	break;
+            case COMPANYNAME:
+            	hours.get(hours.size()-1).getShop().getCompany().setName(elementValue);
+            	break;
+            case COMPANYPHONENUMBER:
+            	hours.get(hours.size()-1).getShop().getCompany().setPhoneNumber(elementValue);
+            	break;
+            case COMPANYEMAIL:
+            	hours.get(hours.size()-1).getShop().getCompany().setEmail(elementValue);
+            	break;
         }
         
     }

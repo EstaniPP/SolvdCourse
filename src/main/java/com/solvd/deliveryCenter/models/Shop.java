@@ -10,6 +10,7 @@ public class Shop {
 	private String email;
 	private ArrayList<BusinessHour> openHours;
 	private ArrayList<Product> products;
+	private Company company;
 	
 	public Shop() {
 		// TODO Auto-generated constructor stub
@@ -69,5 +70,13 @@ public class Shop {
 	
 	public ArrayList<Product> getProducts() {
 		return products;
+	}
+	
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	
+	public Company getCompany() {
+		return company;
 	}
 }

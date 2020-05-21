@@ -3,6 +3,7 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.BusinessHourDAO;
+import com.solvd.deliveryCenter.DAO.CompanyDAO;
 import com.solvd.deliveryCenter.DAO.ProductDAO;
 import com.solvd.deliveryCenter.DAO.ShopDAO;
 import com.solvd.deliveryCenter.models.Product;
@@ -13,16 +14,19 @@ public class ShopService {
 	private ShopDAO shopDAO;
 	private BusinessHourDAO shopBusinessHoursDAO;
 	private ProductDAO shopProductsDAO;
+	private CompanyDAO companyDAO;
 	
 	public ShopService() {
 		shopDAO = new ShopDAO();
 		shopBusinessHoursDAO = new BusinessHourDAO();
 		shopProductsDAO = new ProductDAO();
+		companyDAO = new CompanyDAO();
 	}
 	
 	public ArrayList<Shop> getAllShops() {
 		ArrayList<Shop> shops = shopDAO.getAllEntities();
 		shops.stream().forEach(shop -> shop.setOpenHours(shopBusinessHoursDAO.getHoursByShopId(shop.getId())));
+		shops.stream().forEach(shop -> shop.setCompany(companyDAO.getEntityByID(shop.getCompanyId())));
 		return shops;
 	}
 	

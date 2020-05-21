@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.XMLParsers.XMLBusinessHourParser;
 import com.solvd.deliveryCenter.XMLParsers.XMLDepartmentParser;
 import com.solvd.deliveryCenter.models.Address;
 import com.solvd.deliveryCenter.models.AdministrativeEmployee;
+import com.solvd.deliveryCenter.models.BusinessHour;
 import com.solvd.deliveryCenter.models.Customer;
 import com.solvd.deliveryCenter.models.Department;
 import com.solvd.deliveryCenter.services.AddressService;
@@ -95,12 +97,31 @@ public class Runner {
 		
 		ArrayList<Department> departments = dep.parseDepartments("src/main/resources/departments.xml");
 		
-		LOGGER.info(departments.size());
-		LOGGER.info(departments.get(0).getId());
-		LOGGER.info(departments.get(0).getVehicles().size());
-		LOGGER.info(departments.get(0).getVehicles().get(0).getDepartmentId());
-		LOGGER.info(departments.get(1).getAddress());
-		LOGGER.info(departments.get(1).getCeoId());
+		LOGGER.info("Departments quenatity: "+departments.size());
+		for(Department d : departments){
+			LOGGER.info("Department id: " + d.getId());
+			LOGGER.info("Vehicles quantity: " +(d.getVehicles()==null ? 0 : d.getVehicles().size()));
+			LOGGER.info("Address: " +d.getAddress());
+			LOGGER.info("Email: " +d.getEmail());
+			LOGGER.info("Phone number: " +d.getPhoneNumber());
+			LOGGER.info("CEO id: " +d.getCeoId());
+			LOGGER.info("");
+		}
+		
+		XMLBusinessHourParser scheduleParser = new XMLBusinessHourParser();
+		
+		ArrayList<BusinessHour> schedule = scheduleParser.parseBusinessHours("src/main/resources/schedules.xml");
+		
+		LOGGER.info("Hours quenatity: "+schedule.size());
+		for(BusinessHour hour : schedule) {
+			LOGGER.info("Hour id: "+hour.getId());
+			LOGGER.info("Day: "+hour.getDay());
+			LOGGER.info("Hour: "+hour.getHour());
+			LOGGER.info("Shop Id: "+hour.getShop().getId());
+			LOGGER.info("Company Id: "+hour.getShop().getCompany().getId());
+			LOGGER.info("Company name: "+hour.getShop().getCompany().getName());
+			LOGGER.info("");
+		}
 		
 	}
 
