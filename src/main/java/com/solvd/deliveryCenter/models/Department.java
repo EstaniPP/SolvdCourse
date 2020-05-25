@@ -2,6 +2,13 @@ package com.solvd.deliveryCenter.models;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "department")
+
 public class Department {
 	private Long id;
 	private String especialization;
@@ -40,26 +47,32 @@ public class Department {
 		this.address = address;
 	}
 	
+	@XmlElement
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	
+	@XmlAttribute
 	public Long getId() {
 		return id;
 	}
 	
+	@XmlElement
 	public String getEspecialization() {
 		return especialization;
 	}
 	
+	@XmlElement
 	public String getEmail() {
 		return email;
 	}
 	
+	@XmlElement
 	public Long getCeoId() {
 		return ceoId;
 	}
 	
+	@XmlElement
 	public String getAddress() {
 		return address;
 	}
@@ -68,6 +81,8 @@ public class Department {
 		this.employees = employees;
 	}
 	
+    @XmlElementWrapper
+    @XmlElement
 	public ArrayList<Employee> getEmployees() {
 		return employees;
 	}
@@ -76,6 +91,8 @@ public class Department {
 		this.vehicles = vehicles;
 	}
 	
+	@XmlElementWrapper
+    @XmlElement
 	public ArrayList<Vehicle> getVehicles() {
 		return vehicles;
 	}

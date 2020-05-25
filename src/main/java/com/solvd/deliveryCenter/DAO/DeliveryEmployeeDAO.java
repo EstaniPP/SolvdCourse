@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.DeliveryEmployee;
 
@@ -55,24 +56,26 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 				ps = c.prepareStatement("select * from Delivery_employees");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					DeliveryEmployee obj = new DeliveryEmployee();
-					obj.setId(rs.getLong("employee_id"));
-					obj.setLicense(rs.getString("drivers_license"));
-					obj.setDeliveryFee(rs.getLong("delivery_fee"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -90,22 +93,26 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("employee_id"));
-				obj.setLicense(rs.getString("drivers_license"));
-				obj.setDeliveryFee(rs.getLong("delivery_fee"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -162,6 +169,19 @@ public class DeliveryEmployeeDAO implements IEntityDAO<DeliveryEmployee> {
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public DeliveryEmployee buildModel(ResultSet rs) {
+		DeliveryEmployee obj = new DeliveryEmployee();
+		try {
+			obj.setId(rs.getLong("employee_id"));
+			obj.setLicense(rs.getString("drivers_license"));
+			obj.setDeliveryFee(rs.getLong("delivery_fee"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

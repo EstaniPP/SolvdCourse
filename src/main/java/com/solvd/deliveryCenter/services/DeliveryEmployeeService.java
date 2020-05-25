@@ -6,14 +6,17 @@ import com.solvd.deliveryCenter.DAO.DBInfoDAO;
 import com.solvd.deliveryCenter.DAO.DeliveryEmployeeDAO;
 import com.solvd.deliveryCenter.DAO.EmployeeDAO;
 import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDBInfoDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.models.DeliveryEmployee;
 import com.solvd.deliveryCenter.models.Employee;
 
 public class DeliveryEmployeeService {
-		private EmployeeDAO employeeDAO;
-		private DeliveryEmployeeDAO deliveryEmployeeDAO;
-		private EmployeePhoneNumberDAO employeePhonesDAO;
-		private DBInfoDAO dbinfo;
+		private IEntityDAO<Employee> employeeDAO;
+		private IEntityDAO<DeliveryEmployee> deliveryEmployeeDAO;
+		private IEmployeePhoneNumberDAO employeePhonesDAO;
+		private IDBInfoDAO dbinfo;
 		
 		public DeliveryEmployeeService() {
 			deliveryEmployeeDAO = new DeliveryEmployeeDAO();

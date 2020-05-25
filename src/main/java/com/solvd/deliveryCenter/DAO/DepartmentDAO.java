@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Department;
 
@@ -56,27 +57,26 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 				ps = c.prepareStatement("select * from Departments");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Department obj = new Department();
-					obj.setId(rs.getLong("id"));
-					obj.setEspecialization(rs.getString("especialization"));
-					obj.setAddress(rs.getString("address"));
-					obj.setPhoneNumber(rs.getString("phone_number"));
-					obj.setEmail(rs.getString("email"));
-					obj.setCeoId(rs.getLong("ceo_id"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -94,25 +94,26 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setEspecialization(rs.getString("especialization"));
-				obj.setAddress(rs.getString("address"));
-				obj.setPhoneNumber(rs.getString("phone_number"));
-				obj.setEmail(rs.getString("email"));
-				obj.setCeoId(rs.getLong("ceo_id"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -178,6 +179,22 @@ public class DepartmentDAO implements IEntityDAO<Department>{
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public Department buildModel(ResultSet rs) {
+		Department obj = new Department();
+		try {
+			obj.setId(rs.getLong("id"));
+			obj.setEspecialization(rs.getString("especialization"));
+			obj.setAddress(rs.getString("address"));
+			obj.setPhoneNumber(rs.getString("phone_number"));
+			obj.setEmail(rs.getString("email"));
+			obj.setCeoId(rs.getLong("ceo_id"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Vehicle;
 
@@ -55,25 +56,26 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 				ps = c.prepareStatement("select * from Vehicles");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Vehicle obj = new Vehicle();
-					obj.setDepartmentId(rs.getLong("department_id"));
-					obj.setPlate(rs.getString("plate"));
-					obj.setModel(rs.getString("model"));
-					obj.setYear(rs.getInt("year"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,24 +93,26 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setDepartmentId(rs.getLong("department_id"));
-				obj.setPlate(rs.getString("plate"));
-				obj.setModel(rs.getString("model"));
-				obj.setYear(rs.getInt("year"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -168,6 +172,20 @@ public class VehicleDAO implements IEntityDAO<Vehicle>{
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public Vehicle buildModel(ResultSet rs) {
+		Vehicle obj = new Vehicle();
+		try {
+			obj.setDepartmentId(rs.getLong("department_id"));
+			obj.setPlate(rs.getString("plate"));
+			obj.setModel(rs.getString("model"));
+			obj.setYear(rs.getInt("year"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

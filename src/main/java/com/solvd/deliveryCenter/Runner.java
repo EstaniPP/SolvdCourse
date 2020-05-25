@@ -1,22 +1,11 @@
 package com.solvd.deliveryCenter;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.solvd.deliveryCenter.XMLParsers.XMLBusinessHourParser;
-import com.solvd.deliveryCenter.XMLParsers.XMLDepartmentParser;
+import com.solvd.deliveryCenter.jaxb.JAXBAddressParser;
 import com.solvd.deliveryCenter.models.Address;
-import com.solvd.deliveryCenter.models.AdministrativeEmployee;
-import com.solvd.deliveryCenter.models.BusinessHour;
 import com.solvd.deliveryCenter.models.Customer;
-import com.solvd.deliveryCenter.models.Department;
-import com.solvd.deliveryCenter.services.AddressService;
-import com.solvd.deliveryCenter.services.AdministrativeEmployeeService;
-import com.solvd.deliveryCenter.services.CustomerService;
-import com.solvd.deliveryCenter.services.DepartmentService;
 
 
 public class Runner {
@@ -24,105 +13,28 @@ public class Runner {
 	private final static Logger LOGGER = LogManager.getLogger(Runner.class);
 	
 	public static void main(String[] args) {
-		/*CustomerService customerService = new CustomerService();
-		Customer customer = new Customer();
-		customer.setBirthDate(Date.valueOf("1997-04-29"));
-		customer.setEmail("email@email.com");
-		customer.setFirstName("Mathew");
-		customer.setLastName("Fraser");
-		customerService.saveCosumer(customer);
 		
-
-		customer = customerService.getAllCustomers().get(0);
+		Address a = new Address();
+		a.setId(1l);
+		a.setCity("Miramar");
+		a.setCustomer(new Customer());
+		a.setCustomerId(1l);
+		a.setDirection("9 1344");
+		a.setEstate("Buenos Aires");
+		a.setPostalCode("7607");
 		
-		AddressService addressService = new AddressService();
-		Address address = new Address();
-		address.setAddress("address");
-		address.setCity("New York");
-		address.setCustomerId(customer.getId());
-		address.setEstate("California");
-		address.setPostalCode("10000");
-		addressService.saveAddress(address);
+		JAXBAddressParser ja = new JAXBAddressParser();
 		
-		for(Customer c : customerService.getAllCustomers()) {
-			LOGGER.info("Customer: "+ c.getId());
-			for(Address a : addressService.getAllAdressesByCostumerID(c.getId())) {
-				LOGGER.info("Customer address: "+ a.getId() +" "+ a.getAddress());
-			}
-		}
+		ja.AddressToXML(a, "src/main/resources/address.xml");
 		
-		for(Customer c : customerService.getAllCustomers()) {
-			customerService.deleteCustomer(c.getId());
-		}
-
-		DepartmentService dService = new DepartmentService();
-		Department dep = new Department();
-		dep.setAddress("address");
-		dep.setEmail("department@email.com");
-		dep.setEspecialization("delivery");
-		dep.setPhoneNumber("+54-2249305924");
+		a = ja.XMLToAddress("src/main/resources/address.xml");
 		
-		dService.saveDepartment(dep);
-		
-		dep = dService.getAllDepartments().get(0);
-		
-		AdministrativeEmployee ae = new AdministrativeEmployee();
-		AdministrativeEmployeeService aeService = new AdministrativeEmployeeService();
-		
-		ae.setBirthDate(Date.valueOf("1985-02-02"));
-		ae.setDepartmentId(dep.getId());
-		ae.setFirstName("Jhon");
-		ae.setLastName("Jones");
-		ae.setSalary(30000.0);
-		
-		aeService.saveAdministrativeEmployee(ae);
-		
-		ae = aeService.getAllAdministrativeEmployees().get(0);
-		
-		LOGGER.info("Administrative employee: "+ ae.getId() +" " + ae.getEmployeeId() +" "+ ae.getFirstName() +" "+ ae.getLastName() +" "+ ae.getDepartmentId() +" "+ ae.getSalary());
-		
-		ae.setLastName("New Last Name");
-		ae.setSalary(35000.0);
-		
-		aeService.updateAdministrativeEmployee(ae);
-		
-		ae = aeService.getAllAdministrativeEmployees().get(0);
-		
-		LOGGER.info("Administrative employee: "+ ae.getId() +" " + ae.getEmployeeId() +" "+ ae.getFirstName() +" "+ ae.getLastName() +" "+ ae.getDepartmentId() +" "+ ae.getSalary());
-		
-		aeService.getAllAdministrativeEmployees().forEach(obj -> aeService.deleteAdministrativeEmployee(obj.getId()));
-		dService.getAllDepartments().forEach(obj -> dService.deleteDepartment(obj.getId()));*/
-		
-		XMLDepartmentParser dep = new XMLDepartmentParser();
-		
-		ArrayList<Department> departments = dep.parseDepartments("src/main/resources/departments.xml");
-		
-		LOGGER.info("Departments quenatity: "+departments.size());
-		for(Department d : departments){
-			LOGGER.info("Department id: " + d.getId());
-			LOGGER.info("Vehicles quantity: " +(d.getVehicles()==null ? 0 : d.getVehicles().size()));
-			LOGGER.info("Address: " +d.getAddress());
-			LOGGER.info("Email: " +d.getEmail());
-			LOGGER.info("Phone number: " +d.getPhoneNumber());
-			LOGGER.info("CEO id: " +d.getCeoId());
-			LOGGER.info("");
-		}
-		
-		XMLBusinessHourParser scheduleParser = new XMLBusinessHourParser();
-		
-		ArrayList<BusinessHour> schedule = scheduleParser.parseBusinessHours("src/main/resources/schedules.xml");
-		
-		LOGGER.info("Hours quenatity: "+schedule.size());
-		for(BusinessHour hour : schedule) {
-			LOGGER.info("Hour id: "+hour.getId());
-			LOGGER.info("Day: "+hour.getDay());
-			LOGGER.info("Hour: "+hour.getHour());
-			LOGGER.info("Shop Id: "+hour.getShop().getId());
-			LOGGER.info("Company Id: "+hour.getShop().getCompany().getId());
-			LOGGER.info("Company name: "+hour.getShop().getCompany().getName());
-			LOGGER.info("");
-		}
-		
+		LOGGER.info(a.getCity());
+		LOGGER.info(a.getDirection());
+		LOGGER.info(a.getEstate());
+		LOGGER.info(a.getPostalCode());
+		LOGGER.info(a.getCustomerId());
+		LOGGER.info(a.getId());
 	}
 
 }

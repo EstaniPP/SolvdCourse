@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IProductDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Product;
 
@@ -55,25 +56,26 @@ public class ProductDAO implements IProductDAO{
 				ps = c.prepareStatement("select * from Products");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Product obj = new Product();
-					obj.setId(rs.getLong("shop_id"));
-					obj.setDescription(rs.getString("description"));
-					obj.setHeight(rs.getInt("size_height"));
-					obj.setWidth(rs.getInt("size_width"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,24 +93,26 @@ public class ProductDAO implements IProductDAO{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setId(rs.getLong("shop_id"));
-				obj.setDescription(rs.getString("description"));
-				obj.setHeight(rs.getInt("size_height"));
-				obj.setWidth(rs.getInt("size_width"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -183,27 +187,42 @@ public class ProductDAO implements IProductDAO{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Product obj = new Product();
-					obj.setId(rs.getLong("shop_id"));
-					obj.setDescription(rs.getString("description"));
-					obj.setHeight(rs.getInt("size_height"));
-					obj.setWidth(rs.getInt("size_width"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
+	}
+
+	@Override
+	public Product buildModel(ResultSet rs) {
+		Product obj = new Product();
+		try {
+			obj.setId(rs.getLong("shop_id"));
+			obj.setDescription(rs.getString("description"));
+			obj.setHeight(rs.getInt("size_height"));
+			obj.setWidth(rs.getInt("size_width"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IAddressDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Address;
 
@@ -58,14 +59,7 @@ public class AddressDAO implements IAddressDAO{
 				ps = c.prepareStatement("select * from Addresses");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Address a = new Address();
-					a.setId(rs.getLong("id"));
-					a.setCustomerId(rs.getLong("customer_id"));
-					a.setAddress(rs.getString("address"));
-					a.setCity(rs.getString("city"));
-					a.setEstate(rs.getString("estate"));
-					a.setPostalCode(rs.getString("postal_code"));
-					addresses.add(a);
+					addresses.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
@@ -97,13 +91,7 @@ public class AddressDAO implements IAddressDAO{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				a.setId(rs.getLong("id"));
-				a.setCustomerId(rs.getLong("customer_id"));
-				a.setAddress(rs.getString("address"));
-				a.setCity(rs.getString("city"));
-				a.setEstate(rs.getString("estate"));
-				a.setPostalCode(rs.getString("postal_code"));
-				ps.close();
+				a= buildModel(rs);
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
@@ -111,11 +99,17 @@ public class AddressDAO implements IAddressDAO{
 			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return a;
 	}
@@ -130,7 +124,7 @@ public class AddressDAO implements IAddressDAO{
 				c= conn.getConnection();
 				ps = c.prepareStatement("insert into Addresses (customer_id, address, city, estate, postal_code) values (?,?,?,?,?)");
 				ps.setLong(1, entity.getCustomerId());
-				ps.setString(2, entity.getAddress());
+				ps.setString(2, entity.getDirection());
 				ps.setString(3, entity.getCity());
 				ps.setString(4, entity.getEstate());
 				ps.setString(5, entity.getPostalCode());
@@ -160,7 +154,7 @@ public class AddressDAO implements IAddressDAO{
 				c= conn.getConnection();
 				ps = c.prepareStatement("update Addresses set customer_id = ?, address = ?, city = ?, estate = ?, postal_code = ?  where id = ?");
 				ps.setLong(1, entity.getCustomerId());
-				ps.setString(2, entity.getAddress());
+				ps.setString(2, entity.getDirection());
 				ps.setString(3, entity.getCity());
 				ps.setString(4, entity.getEstate());
 				ps.setString(5, entity.getPostalCode());
@@ -195,29 +189,44 @@ public class AddressDAO implements IAddressDAO{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Address a = new Address();
-					a.setId(rs.getLong("id"));
-					a.setCustomerId(rs.getLong("customer_id"));
-					a.setAddress(rs.getString("address"));
-					a.setCity(rs.getString("city"));
-					a.setEstate(rs.getString("estate"));
-					a.setPostalCode(rs.getString("postal_code"));
-					addresses.add(a);
+					addresses.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return addresses;
+	}
+
+	@Override
+	public Address buildModel(ResultSet rs) {
+		Address a = new Address();
+		try {
+			a.setId(rs.getLong("id"));
+			a.setCustomerId(rs.getLong("customer_id"));
+			a.setDirection(rs.getString("address"));
+			a.setCity(rs.getString("city"));
+			a.setEstate(rs.getString("estate"));
+			a.setPostalCode(rs.getString("postal_code"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return a;
 	}
 	
 }

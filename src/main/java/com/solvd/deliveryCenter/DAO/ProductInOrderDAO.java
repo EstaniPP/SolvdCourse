@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.ProductInOrder;
 
@@ -55,25 +56,26 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 				ps = c.prepareStatement("select * from Products_in_orders");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					ProductInOrder obj = new ProductInOrder();
-					obj.setId(rs.getLong("id"));
-					obj.setOrderId(rs.getLong("order_id"));
-					obj.setProductId(rs.getLong("product_id"));
-					obj.setQuantity(rs.getInt("quantity"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,23 +93,26 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setOrderId(rs.getLong("order_id"));
-				obj.setProductId(rs.getLong("product_id"));
-				obj.setQuantity(rs.getInt("quantity"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -165,6 +170,20 @@ public class ProductInOrderDAO implements IEntityDAO<ProductInOrder> {
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public ProductInOrder buildModel(ResultSet rs) {
+		ProductInOrder obj = new ProductInOrder();
+		try {
+			obj.setId(rs.getLong("id"));
+			obj.setOrderId(rs.getLong("order_id"));
+			obj.setProductId(rs.getLong("product_id"));
+			obj.setQuantity(rs.getInt("quantity"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

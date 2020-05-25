@@ -2,6 +2,16 @@ package com.solvd.deliveryCenter.models;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.solvd.deliveryCenter.jaxb.adapters.DateAdapter;
+
+@XmlRootElement(name = "order")
+
 public class Order {
 	private Long id;
 	private Long vehicleId;
@@ -44,34 +54,44 @@ public class Order {
 		this.addressId = addressId;
 	}
 	
+    @XmlElement
 	public Long getVehicleId() {
 		return vehicleId;
 	}
 	
+    @XmlElementWrapper
+    @XmlElement
 	public ArrayList<ProductInOrder> getProducts() {
 		return products;
 	}
 	
+    @XmlElement
 	public Integer getPrice() {
 		return price;
 	}
 	
+	@XmlAttribute
 	public Long getId() {
 		return id;
 	}
 	
+    @XmlElement
 	public Long getEmployeeId() {
 		return employeeId;
 	}
 	
+	@XmlJavaTypeAdapter(DateAdapter.class)
+	@XmlElement
 	public java.sql.Date getDate() {
 		return date;
 	}
 	
+    @XmlElement
 	public Long getAddressId() {
 		return addressId;
 	}	
 	
+    @XmlElement
 	public Complain getComplain() {
 		return complain;
 	}

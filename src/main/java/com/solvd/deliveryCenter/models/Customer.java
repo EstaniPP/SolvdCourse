@@ -2,6 +2,16 @@ package com.solvd.deliveryCenter.models;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.solvd.deliveryCenter.jaxb.adapters.DateAdapter;
+
+@XmlRootElement(name = "customer")
+
 public class Customer {
 	private Long id;
 	private String firstName;
@@ -13,6 +23,52 @@ public class Customer {
 	
 	public Customer() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	@XmlAttribute
+	public Long getId() {
+		return id;
+	}
+	
+    @XmlElementWrapper
+    @XmlElement
+	public ArrayList<CustomerPhoneNumber> getPhones() {
+		return phones;
+	}
+	
+	@XmlElement
+	public String getEmail() {
+		return email;
+	}
+	
+    @XmlElementWrapper
+    @XmlElement
+	public ArrayList<Address> getAddresses() {
+		return addresses;
+	}
+	
+	@XmlElement
+	public String getLastName() {
+		return lastName;
+	}
+	
+	@XmlElement
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	@XmlJavaTypeAdapter(DateAdapter.class)
+	@XmlElement
+	public java.sql.Date getBirthDate() {
+		return birthDate;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public void setBirthDate(java.sql.Date birthDate) {
+		this.birthDate = birthDate;
 	}
 	
 	public void setPhones(ArrayList<CustomerPhoneNumber> phones) {
@@ -33,41 +89,5 @@ public class Customer {
 	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-	
-	public ArrayList<CustomerPhoneNumber> getPhones() {
-		return phones;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public ArrayList<Address> getAddresses() {
-		return addresses;
-	}
-	
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
-	public void setBirthDate(java.sql.Date birthDate) {
-		this.birthDate = birthDate;
-	}
-	
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	public java.sql.Date getBirthDate() {
-		return birthDate;
 	}
 }

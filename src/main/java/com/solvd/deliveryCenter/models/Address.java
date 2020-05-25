@@ -1,10 +1,16 @@
 package com.solvd.deliveryCenter.models;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "address")
+
 public class Address {
 
 	private Long id;
 	private Long customerId;
-	private String address;
+	private String direction;
 	private String city;
 	private String estate;
 	private String postalCode;
@@ -12,6 +18,41 @@ public class Address {
 	
 	public Address() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	@XmlAttribute
+	public Long getId() {
+		return id;
+	}
+	
+	@XmlElement
+	public String getPostalCode() {
+		return postalCode;
+	}
+	
+	@XmlElement
+	public String getEstate() {
+		return estate;
+	}
+	
+	@XmlElement
+	public Long getCustomerId() {
+		return customerId;
+	}
+	
+	@XmlElement
+	public String getCity() {
+		return city;
+	}
+	
+	@XmlElement
+	public String getDirection() {
+		return direction;
+	}
+	
+	@XmlElement
+	public Customer getCustomer() {
+		return customer;
 	}
 	
 	public void setPostalCode(String postalCode) {
@@ -34,39 +75,13 @@ public class Address {
 		this.city = city;
 	}
 	
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
-	public String getPostalCode() {
-		return postalCode;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public String getEstate() {
-		return estate;
-	}
-	
-	public Long getCustomerId() {
-		return customerId;
-	}
-	
-	public String getCity() {
-		return city;
-	}
-	
-	public String getAddress() {
-		return address;
+	public void setDirection(String address) {
+		this.direction = address;
 	}
 	
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 	
-	public Customer getCustomer() {
-		return customer;
-	}
+
 }

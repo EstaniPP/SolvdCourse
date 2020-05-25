@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Company;
 
@@ -55,25 +56,26 @@ public class CompanyDAO implements IEntityDAO<Company>{
 				ps = c.prepareStatement("select * from Companies");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Company obj = new Company();
-					obj.setId(rs.getLong("id"));
-					obj.setEmail(rs.getString("email"));
-					obj.setName(rs.getString("name"));
-					obj.setPhoneNumber(rs.getString("phone_number"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,23 +93,26 @@ public class CompanyDAO implements IEntityDAO<Company>{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setEmail(rs.getString("email"));
-				obj.setName(rs.getString("name"));
-				obj.setPhoneNumber(rs.getString("phone_number"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -165,6 +170,20 @@ public class CompanyDAO implements IEntityDAO<Company>{
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public Company buildModel(ResultSet rs) {
+		Company obj = new Company();
+		try {
+			obj.setId(rs.getLong("id"));
+			obj.setEmail(rs.getString("email"));
+			obj.setName(rs.getString("name"));
+			obj.setPhoneNumber(rs.getString("phone_number"));
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

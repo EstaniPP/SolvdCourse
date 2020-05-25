@@ -7,16 +7,20 @@ import com.solvd.deliveryCenter.DAO.DBInfoDAO;
 import com.solvd.deliveryCenter.DAO.EmployeeDAO;
 import com.solvd.deliveryCenter.DAO.EmployeeHourDAO;
 import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDBInfoDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeHourDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.models.AdministrativeEmployee;
 import com.solvd.deliveryCenter.models.Employee;
 
 public class AdministrativeEmployeeService {
 	
-		private EmployeeHourDAO employeeHours;
-		private EmployeeDAO employeeDAO;
+		private IEmployeeHourDAO employeeHours;
+		private IEntityDAO<Employee> employeeDAO;
 		private AdministrativeEmployeeDAO administrativeEmployeeDAO;
-		private EmployeePhoneNumberDAO employeePhones;
-		private DBInfoDAO dbinfo;
+		private IEmployeePhoneNumberDAO employeePhones;
+		private IDBInfoDAO dbinfo;
 		
 		public AdministrativeEmployeeService() {
 			administrativeEmployeeDAO = new AdministrativeEmployeeDAO();

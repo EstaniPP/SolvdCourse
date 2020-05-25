@@ -3,11 +3,12 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
 import com.solvd.deliveryCenter.models.EmployeePhoneNumber;
 
 public class EmployeePhoneNumberService {
 
-	private EmployeePhoneNumberDAO employeePhoneNumberDAO;
+	private IEmployeePhoneNumberDAO employeePhoneNumberDAO;
 	
 	public EmployeePhoneNumberService() {
 		employeePhoneNumberDAO = new EmployeePhoneNumberDAO();

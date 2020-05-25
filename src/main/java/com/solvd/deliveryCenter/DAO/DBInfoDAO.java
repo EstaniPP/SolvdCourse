@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDBInfoDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 
-public class DBInfoDAO {
+public class DBInfoDAO implements IDBInfoDAO{
 
 	private final static Logger LOGGER = LogManager.getLogger(DBInfoDAO.class);
 
@@ -31,14 +32,20 @@ public class DBInfoDAO {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return id;
 	}

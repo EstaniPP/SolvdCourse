@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.EmployeePhoneNumber;
 
@@ -56,24 +57,26 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 				ps = c.prepareStatement("select * from Employee_phone_numbers");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					EmployeePhoneNumber obj = new EmployeePhoneNumber();
-					obj.setId(rs.getLong("id"));
-					obj.setEmployeeId(rs.getLong("employee_id"));
-					obj.setPhoneNumber(rs.getString("phone"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,22 +94,26 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setEmployeeId(rs.getLong("employee_id"));
-				obj.setPhoneNumber(rs.getString("phone"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -177,26 +184,41 @@ public class EmployeePhoneNumberDAO implements IEmployeePhoneNumberDAO {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					EmployeePhoneNumber obj = new EmployeePhoneNumber();
-					obj.setId(rs.getLong("id"));
-					obj.setEmployeeId(rs.getLong("employee_id"));
-					obj.setPhoneNumber(rs.getString("phone"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
+	}
+
+	@Override
+	public EmployeePhoneNumber buildModel(ResultSet rs) {
+		EmployeePhoneNumber obj = new EmployeePhoneNumber();
+		try {
+			obj.setId(rs.getLong("id"));
+			obj.setEmployeeId(rs.getLong("employee_id"));
+			obj.setPhoneNumber(rs.getString("phone"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

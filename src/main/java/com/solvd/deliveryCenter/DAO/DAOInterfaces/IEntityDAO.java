@@ -1,5 +1,6 @@
-package com.solvd.deliveryCenter.DAO;
+package com.solvd.deliveryCenter.DAO.DAOInterfaces;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public interface IEntityDAO<T> {
@@ -12,4 +13,6 @@ public interface IEntityDAO<T> {
 		void deleteEntityByID(Long id);
 		
 		void updateEntity(T entity);
+		
+		T buildModel(ResultSet rs);
 }

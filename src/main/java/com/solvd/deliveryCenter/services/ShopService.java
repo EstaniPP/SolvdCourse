@@ -6,15 +6,19 @@ import com.solvd.deliveryCenter.DAO.BusinessHourDAO;
 import com.solvd.deliveryCenter.DAO.CompanyDAO;
 import com.solvd.deliveryCenter.DAO.ProductDAO;
 import com.solvd.deliveryCenter.DAO.ShopDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IBusinessHourDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IProductDAO;
+import com.solvd.deliveryCenter.models.Company;
 import com.solvd.deliveryCenter.models.Product;
 import com.solvd.deliveryCenter.models.Shop;
 
 public class ShopService {
 
-	private ShopDAO shopDAO;
-	private BusinessHourDAO shopBusinessHoursDAO;
-	private ProductDAO shopProductsDAO;
-	private CompanyDAO companyDAO;
+	private IEntityDAO<Shop> shopDAO;
+	private IBusinessHourDAO shopBusinessHoursDAO;
+	private IProductDAO shopProductsDAO;
+	private IEntityDAO<Company> companyDAO;
 	
 	public ShopService() {
 		shopDAO = new ShopDAO();

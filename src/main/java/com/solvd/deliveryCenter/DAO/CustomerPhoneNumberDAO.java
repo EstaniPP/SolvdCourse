@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.ICustomerPhoneNumberDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.CustomerPhoneNumber;
 
@@ -55,24 +56,26 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 				ps = c.prepareStatement("select * from Customer_phone_numbers");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					CustomerPhoneNumber obj = new CustomerPhoneNumber();
-					obj.setId(rs.getLong("id"));
-					obj.setCustomerId(rs.getLong("customer_id"));
-					obj.setPhoneNumber(rs.getString("phone"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -90,22 +93,26 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setCustomerId(rs.getLong("customer_id"));
-				obj.setPhoneNumber(rs.getString("phone"));
+				obj= buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -186,16 +193,35 @@ public class CustomerPhoneNumberDAO implements ICustomerPhoneNumberDAO {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
+	}
+
+	@Override
+	public CustomerPhoneNumber buildModel(ResultSet rs) {
+		CustomerPhoneNumber obj = new CustomerPhoneNumber();
+		try {
+			obj.setId(rs.getLong("id"));
+			obj.setCustomerId(rs.getLong("customer_id"));
+			obj.setPhoneNumber(rs.getString("phone"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

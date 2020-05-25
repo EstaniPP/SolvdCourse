@@ -1,5 +1,11 @@
 package com.solvd.deliveryCenter.models;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "deliveryEmployee")
+
 public class DeliveryEmployee extends Employee{
 	private Long employeeId;
 	private Long deliveryFee;
@@ -17,11 +23,14 @@ public class DeliveryEmployee extends Employee{
 		this.deliveryFee = deliveryFee;
 	}
 	
+	
+    @XmlElement
 	public String getLicense() {
 		return License;
 	}
 	
-	public Long getDeliveryFee() {
+    @XmlElement
+    public Long getDeliveryFee() {
 		return deliveryFee;
 	}
 	
@@ -29,6 +38,7 @@ public class DeliveryEmployee extends Employee{
 		this.employeeId = employeeId;
 	}
 	
+	@XmlAttribute
 	public Long getEmployeeId() {
 		return employeeId;
 	}

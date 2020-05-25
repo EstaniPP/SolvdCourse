@@ -2,6 +2,13 @@ package com.solvd.deliveryCenter.models;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "administrativeEmployee")
+
 public class AdministrativeEmployee extends Employee{
 	private Long employeeId;
 	private Double salary;
@@ -19,10 +26,13 @@ public class AdministrativeEmployee extends Employee{
 		this.salary = salary;
 	}
 	
+    @XmlElementWrapper
+    @XmlElement
 	public ArrayList<EmployeeHour> getSchedule() {
 		return schedule;
 	}
 	
+    @XmlElement
 	public Double getSalary() {
 		return salary;
 	}
@@ -31,6 +41,7 @@ public class AdministrativeEmployee extends Employee{
 		this.employeeId = employee_id;
 	}
 	
+	@XmlAttribute
 	public Long getEmployeeId() {
 		return employeeId;
 	}

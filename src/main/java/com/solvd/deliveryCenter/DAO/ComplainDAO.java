@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IComplainDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Complain;
 
@@ -55,25 +56,26 @@ public class ComplainDAO implements IComplainDAO {
 				ps = c.prepareStatement("select * from Complains");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Complain obj = new Complain();
-					obj.setId(rs.getLong("id"));
-					obj.setOrderId(rs.getLong("order_id"));
-					obj.setDescription(rs.getString("description"));
-					obj.setDate(rs.getDate("date"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,23 +93,26 @@ public class ComplainDAO implements IComplainDAO {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setOrderId(rs.getLong("order_id"));
-				obj.setDescription(rs.getString("description"));
-				obj.setDate(rs.getDate("date"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -180,27 +185,43 @@ public class ComplainDAO implements IComplainDAO {
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				if(rs.next()) {
-					obj = new Complain();
-					obj.setId(rs.getLong("id"));
-					obj.setOrderId(rs.getLong("order_id"));
-					obj.setDescription(rs.getString("description"));
-					obj.setDate(rs.getDate("date"));
+					obj = buildModel(rs);
 				}
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
+	}
+
+	@Override
+	public Complain buildModel(ResultSet rs) {
+		Complain obj = new Complain();
+		try {
+			obj.setId(rs.getLong("id"));
+			obj.setOrderId(rs.getLong("order_id"));
+			obj.setDescription(rs.getString("description"));
+			obj.setDate(rs.getDate("date"));
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

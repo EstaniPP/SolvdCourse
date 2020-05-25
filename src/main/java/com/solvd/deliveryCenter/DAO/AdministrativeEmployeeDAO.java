@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.AdministrativeEmployee;
 
@@ -58,23 +59,26 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				ps = c.prepareStatement("select * from Administrative_employees");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					AdministrativeEmployee a = new AdministrativeEmployee();
-					a.setEmployeeId(rs.getLong("employee_id"));
-					a.setSalary(rs.getDouble("salary"));
-					list.add(a);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -93,21 +97,26 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("employee_id"));
-				obj.setSalary(rs.getDouble("salary"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -163,6 +172,18 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public AdministrativeEmployee buildModel(ResultSet rs) {
+		AdministrativeEmployee a = new AdministrativeEmployee();
+		try {
+			a.setEmployeeId(rs.getLong("employee_id"));
+			a.setSalary(rs.getDouble("salary"));
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+		return a;
 	}
 	
 }

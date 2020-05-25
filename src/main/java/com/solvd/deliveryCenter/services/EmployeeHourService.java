@@ -3,11 +3,12 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.EmployeeHourDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeHourDAO;
 import com.solvd.deliveryCenter.models.EmployeeHour;
 
 public class EmployeeHourService {
 
-	private EmployeeHourDAO employeeHourDAO;
+	private IEmployeeHourDAO employeeHourDAO;
 	
 	public EmployeeHourService() {
 		employeeHourDAO = new EmployeeHourDAO();

@@ -1,4 +1,4 @@
-package com.solvd.deliveryCenter.DAO;
+package com.solvd.deliveryCenter.DAO.DAOInterfaces;
 
 public interface IDBInfoDAO {
 

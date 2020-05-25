@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Shop;
 
@@ -55,25 +56,26 @@ public class ShopDAO implements IEntityDAO<Shop>{
 				ps = c.prepareStatement("select * from Shops");
 				rs = ps.executeQuery();
 				while(rs.next()) {
-					Shop obj = new Shop();
-					obj.setCompanyId(rs.getLong("company_id"));
-					obj.setAddress(rs.getString("address"));
-					obj.setPhoneNumber(rs.getString("phone_number"));
-					obj.setEmail(rs.getString("email"));
-					list.add(obj);
+					list.add(buildModel(rs));
 				}
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return list;
 	}
@@ -91,24 +93,26 @@ public class ShopDAO implements IEntityDAO<Shop>{
 				ps.setLong(1, id);
 				rs = ps.executeQuery();
 				rs.next();
-				obj.setId(rs.getLong("id"));
-				obj.setCompanyId(rs.getLong("company_id"));
-				obj.setAddress(rs.getString("address"));
-				obj.setPhoneNumber(rs.getString("phone_number"));
-				obj.setEmail(rs.getString("email"));
+				obj = buildModel(rs);
 				ps.close();
 			} catch (InterruptedException e) {
 				LOGGER.error(e);
 			} catch (SQLException e) {
 				LOGGER.error(e);
-			} finally {
+			}finally {
 				try {
 					rs.close();
-					ps.close();
 				} catch (SQLException e) {
 					LOGGER.error(e);
+				}finally {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						LOGGER.error(e);
+					}finally {
+						conn.releaseConnection(c);
+					}
 				}
-				conn.releaseConnection(c);
 			}
 			return obj;
 	}
@@ -168,6 +172,20 @@ public class ShopDAO implements IEntityDAO<Shop>{
 				}
 				conn.releaseConnection(c);
 			}
+	}
+
+	@Override
+	public Shop buildModel(ResultSet rs) {
+		Shop obj = new Shop();
+		try {
+			obj.setCompanyId(rs.getLong("company_id"));
+			obj.setAddress(rs.getString("address"));
+			obj.setPhoneNumber(rs.getString("phone_number"));
+			obj.setEmail(rs.getString("email"));
+		} catch (SQLException e) {
+			LOGGER.error(e);
+		}
+		return obj;
 	}
 	
 }

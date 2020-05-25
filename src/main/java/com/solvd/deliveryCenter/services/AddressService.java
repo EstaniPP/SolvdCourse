@@ -5,18 +5,21 @@ import java.util.ArrayList;
 import com.solvd.deliveryCenter.DAO.AddressDAO;
 import com.solvd.deliveryCenter.DAO.CustomerDAO;
 import com.solvd.deliveryCenter.DAO.OrderDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.models.Address;
+import com.solvd.deliveryCenter.models.Customer;
 import com.solvd.deliveryCenter.models.Order;
 
 public class AddressService {
 
 	private AddressDAO addressDAO;
 	private OrderDAO orderDAO;
-	private CustomerDAO customerDAO;
+	private IEntityDAO<Customer> customerDAO;
 	
 	public AddressService() {
 		addressDAO = new AddressDAO();
 		orderDAO = new OrderDAO();
+		customerDAO = new CustomerDAO();
 	}
 	
 	public ArrayList<Address> getAllAdresses(){

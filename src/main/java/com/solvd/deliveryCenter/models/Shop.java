@@ -2,6 +2,13 @@ package com.solvd.deliveryCenter.models;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "shop")
+
 public class Shop {
 	private Long id;
 	private Long companyId;
@@ -36,22 +43,27 @@ public class Shop {
 		this.address = address;
 	}
 	
+	@XmlElement
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	
+	@XmlAttribute
 	public Long getId() {
 		return id;
 	}
 	
+	@XmlElement
 	public String getEmail() {
 		return email;
 	}
 	
+	@XmlElement
 	public Long getCompanyId() {
 		return companyId;
 	}
 	
+	@XmlElement
 	public String getAddress() {
 		return address;
 	}
@@ -59,7 +71,9 @@ public class Shop {
 	public void setOpenHours(ArrayList<BusinessHour> openHours) {
 		this.openHours = openHours;
 	}
-	
+
+    @XmlElementWrapper
+	@XmlElement
 	public ArrayList<BusinessHour> getOpenHours() {
 		return openHours;
 	}
@@ -68,6 +82,8 @@ public class Shop {
 		this.products = products;
 	}
 	
+    @XmlElementWrapper
+	@XmlElement
 	public ArrayList<Product> getProducts() {
 		return products;
 	}
@@ -76,6 +92,7 @@ public class Shop {
 		this.company = company;
 	}
 	
+	@XmlElement
 	public Company getCompany() {
 		return company;
 	}

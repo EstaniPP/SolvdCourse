@@ -3,11 +3,12 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.DepartmentDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.models.Department;
 
 public class DepartmentService {
 	
-	private DepartmentDAO dDAO;
+	private IEntityDAO<Department> dDAO;
 	
 	public DepartmentService() {
 		dDAO = new DepartmentDAO();

@@ -1,5 +1,12 @@
 package com.solvd.deliveryCenter.models;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@XmlRootElement(name = "customerPhoneNumber")
+
 public class CustomerPhoneNumber {
 	private Long id;
 	private String phoneNumber;
@@ -21,14 +28,17 @@ public class CustomerPhoneNumber {
 		this.customerId = customerId;
 	}
 	
+    @XmlElement
 	public String getPhones() {
 		return phoneNumber;
 	}
 	
+	@XmlAttribute
 	public Long getId() {
 		return id;
 	}
 	
+	@XmlElement
 	public Long getCustomerId() {
 		return customerId;
 	}
