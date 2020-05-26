@@ -1,0 +1,64 @@
+2020-05-26 19:43:29 INFO  Runner:54 - Before using frameworks
+2020-05-26 19:43:29 INFO  Runner:55 - Customer:
+2020-05-26 19:43:29 INFO  Runner:56 - 1
+2020-05-26 19:43:29 INFO  Runner:57 - estanipp@gmail.com
+2020-05-26 19:43:29 INFO  Runner:58 - Estanislao
+2020-05-26 19:43:29 INFO  Runner:59 - Perez Peña
+2020-05-26 19:43:29 INFO  Runner:60 - 1997-04-04
+2020-05-26 19:43:29 INFO  Runner:61 - 
+2020-05-26 19:43:29 INFO  Runner:63 - Address:
+2020-05-26 19:43:29 INFO  Runner:64 - Miramar
+2020-05-26 19:43:29 INFO  Runner:65 - 9 1344
+2020-05-26 19:43:29 INFO  Runner:66 - Buenos Aires
+2020-05-26 19:43:29 INFO  Runner:67 - 7607
+2020-05-26 19:43:29 INFO  Runner:68 - 1
+2020-05-26 19:43:29 INFO  Runner:63 - Address:
+2020-05-26 19:43:29 INFO  Runner:64 - Tandil
+2020-05-26 19:43:29 INFO  Runner:65 - 11 de septiembre 264
+2020-05-26 19:43:29 INFO  Runner:66 - Buenos Aires
+2020-05-26 19:43:29 INFO  Runner:67 - 7000
+2020-05-26 19:43:29 INFO  Runner:68 - 1
+2020-05-26 19:43:29 INFO  Runner:70 - 
+2020-05-26 19:43:29 INFO  Runner:71 - 
+2020-05-26 19:43:29 INFO  Runner:81 - After using JaxB
+2020-05-26 19:43:29 INFO  Runner:82 - Customer:
+2020-05-26 19:43:29 INFO  Runner:83 - 1
+2020-05-26 19:43:29 INFO  Runner:84 - estanipp@gmail.com
+2020-05-26 19:43:29 INFO  Runner:85 - Estanislao
+2020-05-26 19:43:29 INFO  Runner:86 - Perez Peña
+2020-05-26 19:43:29 INFO  Runner:87 - 1997-04-04
+2020-05-26 19:43:29 INFO  Runner:88 - 
+2020-05-26 19:43:29 INFO  Runner:90 - Address:
+2020-05-26 19:43:29 INFO  Runner:91 - Miramar
+2020-05-26 19:43:29 INFO  Runner:92 - 9 1344
+2020-05-26 19:43:29 INFO  Runner:93 - Buenos Aires
+2020-05-26 19:43:29 INFO  Runner:94 - 7607
+2020-05-26 19:43:29 INFO  Runner:95 - 1
+2020-05-26 19:43:29 INFO  Runner:90 - Address:
+2020-05-26 19:43:29 INFO  Runner:91 - Tandil
+2020-05-26 19:43:29 INFO  Runner:92 - 11 de septiembre 264
+2020-05-26 19:43:29 INFO  Runner:93 - Buenos Aires
+2020-05-26 19:43:29 INFO  Runner:94 - 7000
+2020-05-26 19:43:29 INFO  Runner:95 - 1
+2020-05-26 19:43:29 INFO  Runner:97 - 
+2020-05-26 19:43:29 INFO  Runner:98 - 
+2020-05-26 19:43:30 INFO  Runner:120 - After using Jackson
+2020-05-26 19:43:30 INFO  Runner:121 - Customer:
+2020-05-26 19:43:30 INFO  Runner:122 - 1
+2020-05-26 19:43:30 INFO  Runner:123 - estanipp@gmail.com
+2020-05-26 19:43:30 INFO  Runner:124 - Estanislao
+2020-05-26 19:43:30 INFO  Runner:125 - Perez Peña
+2020-05-26 19:43:30 INFO  Runner:126 - 1997-04-04
+2020-05-26 19:43:30 INFO  Runner:127 - 
+2020-05-26 19:43:30 INFO  Runner:129 - Address:
+2020-05-26 19:43:30 INFO  Runner:130 - Miramar
+2020-05-26 19:43:30 INFO  Runner:131 - 9 1344
+2020-05-26 19:43:30 INFO  Runner:132 - Buenos Aires
+2020-05-26 19:43:30 INFO  Runner:133 - 7607
+2020-05-26 19:43:30 INFO  Runner:134 - 1
+2020-05-26 19:43:30 INFO  Runner:129 - Address:
+2020-05-26 19:43:30 INFO  Runner:130 - Tandil
+2020-05-26 19:43:30 INFO  Runner:131 - 11 de septiembre 264
+2020-05-26 19:43:30 INFO  Runner:132 - Buenos Aires
+2020-05-26 19:43:30 INFO  Runner:133 - 7000
+2020-05-26 19:43:30 INFO  Runner:134 - 1

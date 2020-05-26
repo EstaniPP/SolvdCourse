@@ -24,7 +24,7 @@ public class JAXBCustomerParser {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Customer XMLToAddress(String filePath){ 
+	public Customer XMLToCustomer(String filePath){ 
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(Customer.class );

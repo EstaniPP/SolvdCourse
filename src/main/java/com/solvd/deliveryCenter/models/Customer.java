@@ -31,7 +31,7 @@ public class Customer {
 	}
 	
     @XmlElementWrapper
-    @XmlElement
+    @XmlElement(name="phone")
 	public ArrayList<CustomerPhoneNumber> getPhones() {
 		return phones;
 	}
@@ -42,7 +42,7 @@ public class Customer {
 	}
 	
     @XmlElementWrapper
-    @XmlElement
+    @XmlElement(name="address")
 	public ArrayList<Address> getAddresses() {
 		return addresses;
 	}
