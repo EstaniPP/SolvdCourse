@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DeliveryEmployee extends Employee{
 	private Long employeeId;
 	private Long deliveryFee;
-	private String License;
+	private String license;
 	
 	public DeliveryEmployee() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void setLicense(String license) {
-		License = license;
+		this.license = license;
 	}
 	
 	public void setDeliveryFee(Long deliveryFee) {
@@ -26,7 +26,7 @@ public class DeliveryEmployee extends Employee{
 	
     @XmlElement
 	public String getLicense() {
-		return License;
+		return license;
 	}
 	
     @XmlElement

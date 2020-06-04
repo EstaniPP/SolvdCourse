@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.deliveryCenter.DAO.DAOInterfaces.IOrderDAO">
+	<resultMap id="OrderResultMap" type="com.solvd.deliveryCenter.models.Order">
+		<id property="id" column="id"></id>
+		<result property="vehicleId" column="vehicle_id"></result>
+		<result property="addressId" column="address_id"></result>
+		<result property="employeeId" column="employee_id"></result>
+		<result property="price" column="price"></result>
+		<result property="date" column="date"></result>
+	</resultMap>
+		
+	<select id="getAllEntities" resultMap="OrderResultMap">
+	<![CDATA[
+		select * from Orders;
+	]]>
+	</select>
+
+	<insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[
+		insert into Orders (vehicle_id, address_id, employee_id, price, date) values (#{vehicle_id},#{address_id},#{employee_id},#{price},#{date});
+	]]>
+	</insert>
+	
+	<update id="updateEntity">
+	<![CDATA[
+		update Orders set vehicle_id = #{vehicle_id}, address_id = #{address_id}, employee_id = #{employee_id}, price = #{price}, date = #{date} where id = ?;
+	]]>
+	</update>
+	
+	<delete id="deleteEntityByID">
+	<![CDATA[
+		delete from Orders where id = #{id};
+	]]>
+	</delete>
+	
+	<select id="getEntityByID" resultMap="OrderResultMap">
+	<![CDATA[
+		select * from Orders where id = #{id};
+	]]>
+	</select>
+	
+	<select id="getAllOrdersByEmployeeID" resultMap="OrderResultMap">
+	<![CDATA[
+		select * from Orders where employee_id = #{id};
+	]]>
+	</select>
+	
+	<select id="getAllOrdersByVehicleID" resultMap="OrderResultMap">
+	<![CDATA[
+		select * from Orders where vehicle_id = #{id};
+	]]>
+	</select>
+	
+	<select id="getAllOrdersByAddressID" resultMap="OrderResultMap">
+	<![CDATA[
+		select * from Orders where address_id = #{id};
+	]]>
+	</select>
+	
+</mapper>

@@ -29,7 +29,7 @@ public class AdministrativeEmployeeDAO implements IEntityDAO<AdministrativeEmplo
 			try {
 				
 				c= conn.getConnection();
-				ps = c.prepareStatement("delete from Addresses where id = ?");
+				ps = c.prepareStatement("delete from Administrative_employees where id = ?");
 				ps.setLong(1, id);
 				ps.executeUpdate();
 			} catch (InterruptedException e) {
