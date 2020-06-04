@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeDAO;
 import com.solvd.deliveryCenter.connectionPool.ConnectionPool;
 import com.solvd.deliveryCenter.models.Employee;
 
-public class EmployeeDAO implements IEntityDAO<Employee>{
+public class EmployeeDAO implements IEmployeeDAO{
 	private final static Logger LOGGER = LogManager.getLogger(EmployeeDAO.class);
 	
 	public EmployeeDAO() {

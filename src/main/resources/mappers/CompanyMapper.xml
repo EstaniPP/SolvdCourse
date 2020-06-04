@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO">
+<mapper namespace="com.solvd.deliveryCenter.DAO.DAOInterfaces.ICompanyDAO">
 	<resultMap id="CompanyResultMap" type="com.solvd.deliveryCenter.models.Company">
 		<id property="id" column="id"></id>
 		<result property="name" column="name"></result>

@@ -16,7 +16,18 @@
 		</environment>
 	</environments>
 	<mappers>
-		  <mapper resource="mappers/BusinessHourMapper.xml"/>
-		  <mapper resource="mappers/ShopMapper.xml"/>
+		  <mapper resource="AddressMapper.xml/>
+		  <mapper resource="AdministrativeEmployeeMapper.xml/>
+		  <mapper resource="BusinessHourMapper.xml/>
+		  <mapper resource="CompanyMapper.xml/>
+		  <mapper resource="CustomerMapper.xml/>
+		  <mapper resource="DeliveryEmployeeMapper.xml/>
+		  <mapper resource="DepartmentMapper.xml/>
+		  <mapper resource="EmployeeHourMapper.xml/>
+		  <mapper resource="EmployeeMapper.xml/>
+		  <mapper resource="EmployeePhoneNumberMapper.xml/>
+		  <mapper resource="OrderMapper.xml/>
+		  <mapper resource="ProductMapper.xml/>
+		  <mapper resource="ShopMapper.xml/>
 	</mappers>
 </configuration>
