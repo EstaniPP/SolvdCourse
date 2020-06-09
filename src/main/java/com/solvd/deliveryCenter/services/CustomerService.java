@@ -2,29 +2,26 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
-import com.solvd.deliveryCenter.DAO.AddressDAO;
-import com.solvd.deliveryCenter.DAO.CustomerDAO;
-import com.solvd.deliveryCenter.DAO.CustomerPhoneNumberDAO;
-import com.solvd.deliveryCenter.DAO.OrderDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IAddressDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.ICustomerDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.ICustomerPhoneNumberDAO;
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IOrderDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.Customer;
 import com.solvd.deliveryCenter.models.Order;
 
 public class CustomerService {
 	
-		private IEntityDAO<Customer> customerDAO;
+		private ICustomerDAO customerDAO;
 		private IAddressDAO customerAddresses;
 		private ICustomerPhoneNumberDAO customerPhones;
 		private IOrderDAO orderDAO;
 		
 		public CustomerService() {
-			customerDAO = new CustomerDAO();
-			customerAddresses = new AddressDAO();
-			customerPhones = new CustomerPhoneNumberDAO();
-			orderDAO = new OrderDAO();
+			customerDAO = SQLSession.getInstance().openSession(true).getMapper(ICustomerDAO.class);
+			customerAddresses = SQLSession.getInstance().openSession(true).getMapper(IAddressDAO.class);
+			customerPhones = SQLSession.getInstance().openSession(true).getMapper(ICustomerPhoneNumberDAO.class);
+			orderDAO = SQLSession.getInstance().openSession(true).getMapper(IOrderDAO.class);
 		}
 		
 		public ArrayList<Customer> getAllCustomers() {

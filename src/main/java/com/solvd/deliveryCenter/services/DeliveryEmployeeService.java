@@ -3,25 +3,24 @@ package com.solvd.deliveryCenter.services;
 import java.util.ArrayList;
 
 import com.solvd.deliveryCenter.DAO.DBInfoDAO;
-import com.solvd.deliveryCenter.DAO.DeliveryEmployeeDAO;
-import com.solvd.deliveryCenter.DAO.EmployeeDAO;
-import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDBInfoDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDeliveryEmployeeDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.DeliveryEmployee;
 import com.solvd.deliveryCenter.models.Employee;
 
 public class DeliveryEmployeeService {
-		private IEntityDAO<Employee> employeeDAO;
-		private IEntityDAO<DeliveryEmployee> deliveryEmployeeDAO;
+		private IEmployeeDAO employeeDAO;
+		private IDeliveryEmployeeDAO deliveryEmployeeDAO;
 		private IEmployeePhoneNumberDAO employeePhonesDAO;
 		private IDBInfoDAO dbinfo;
 		
 		public DeliveryEmployeeService() {
-			deliveryEmployeeDAO = new DeliveryEmployeeDAO();
-			employeeDAO = new EmployeeDAO();
-			employeePhonesDAO = new EmployeePhoneNumberDAO();
+			deliveryEmployeeDAO = SQLSession.getInstance().openSession(true).getMapper(IDeliveryEmployeeDAO.class);
+			employeeDAO = SQLSession.getInstance().openSession(true).getMapper(IEmployeeDAO.class);
+			employeePhonesDAO = SQLSession.getInstance().openSession(true).getMapper(IEmployeePhoneNumberDAO.class);
 			dbinfo = new DBInfoDAO();
 		}
 		

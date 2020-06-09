@@ -2,8 +2,8 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
-import com.solvd.deliveryCenter.DAO.EmployeeHourDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeHourDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.EmployeeHour;
 
 public class EmployeeHourService {
@@ -11,7 +11,7 @@ public class EmployeeHourService {
 	private IEmployeeHourDAO employeeHourDAO;
 	
 	public EmployeeHourService() {
-		employeeHourDAO = new EmployeeHourDAO();
+		employeeHourDAO = SQLSession.getInstance().openSession(true).getMapper(IEmployeeHourDAO.class);
 	}
 	
 	public ArrayList<EmployeeHour> getAllEmployeeHours(){

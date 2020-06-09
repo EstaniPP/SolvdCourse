@@ -2,31 +2,29 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
-import com.solvd.deliveryCenter.DAO.AdministrativeEmployeeDAO;
 import com.solvd.deliveryCenter.DAO.DBInfoDAO;
-import com.solvd.deliveryCenter.DAO.EmployeeDAO;
-import com.solvd.deliveryCenter.DAO.EmployeeHourDAO;
-import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IAdministrativeEmployeeDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDBInfoDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeeHourDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.AdministrativeEmployee;
 import com.solvd.deliveryCenter.models.Employee;
 
 public class AdministrativeEmployeeService {
 	
 		private IEmployeeHourDAO employeeHours;
-		private IEntityDAO<Employee> employeeDAO;
-		private AdministrativeEmployeeDAO administrativeEmployeeDAO;
+		private IEmployeeDAO employeeDAO;
+		private IAdministrativeEmployeeDAO administrativeEmployeeDAO;
 		private IEmployeePhoneNumberDAO employeePhones;
 		private IDBInfoDAO dbinfo;
 		
 		public AdministrativeEmployeeService() {
-			administrativeEmployeeDAO = new AdministrativeEmployeeDAO();
-			employeeHours = new EmployeeHourDAO();
-			employeeDAO = new EmployeeDAO();
-			employeePhones = new EmployeePhoneNumberDAO();
+			administrativeEmployeeDAO = SQLSession.getInstance().openSession(true).getMapper(IAdministrativeEmployeeDAO.class);
+			employeeHours = SQLSession.getInstance().openSession(true).getMapper(IEmployeeHourDAO.class);
+			employeeDAO = SQLSession.getInstance().openSession(true).getMapper(IEmployeeDAO.class);
+			employeePhones = SQLSession.getInstance().openSession(true).getMapper(IEmployeePhoneNumberDAO.class);
 			dbinfo = new DBInfoDAO();
 		}
 		

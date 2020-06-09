@@ -2,8 +2,8 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
-import com.solvd.deliveryCenter.DAO.EmployeePhoneNumberDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEmployeePhoneNumberDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.EmployeePhoneNumber;
 
 public class EmployeePhoneNumberService {
@@ -11,7 +11,7 @@ public class EmployeePhoneNumberService {
 	private IEmployeePhoneNumberDAO employeePhoneNumberDAO;
 	
 	public EmployeePhoneNumberService() {
-		employeePhoneNumberDAO = new EmployeePhoneNumberDAO();
+		employeePhoneNumberDAO = SQLSession.getInstance().openSession(true).getMapper(IEmployeePhoneNumberDAO.class);
 	}
 	
 	public ArrayList<EmployeePhoneNumber> getAllEmployeePhoneNumbers(){

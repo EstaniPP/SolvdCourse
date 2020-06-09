@@ -2,29 +2,26 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
-import com.solvd.deliveryCenter.DAO.BusinessHourDAO;
-import com.solvd.deliveryCenter.DAO.CompanyDAO;
-import com.solvd.deliveryCenter.DAO.ProductDAO;
-import com.solvd.deliveryCenter.DAO.ShopDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IBusinessHourDAO;
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.ICompanyDAO;
 import com.solvd.deliveryCenter.DAO.DAOInterfaces.IProductDAO;
-import com.solvd.deliveryCenter.models.Company;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IShopDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.Product;
 import com.solvd.deliveryCenter.models.Shop;
 
 public class ShopService {
 
-	private IEntityDAO<Shop> shopDAO;
+	private IShopDAO shopDAO;
 	private IBusinessHourDAO shopBusinessHoursDAO;
 	private IProductDAO shopProductsDAO;
-	private IEntityDAO<Company> companyDAO;
+	private ICompanyDAO companyDAO;
 	
 	public ShopService() {
-		shopDAO = new ShopDAO();
-		shopBusinessHoursDAO = new BusinessHourDAO();
-		shopProductsDAO = new ProductDAO();
-		companyDAO = new CompanyDAO();
+		shopDAO = SQLSession.getInstance().openSession(true).getMapper(IShopDAO.class);
+		shopBusinessHoursDAO = SQLSession.getInstance().openSession(true).getMapper(IBusinessHourDAO.class);
+		shopProductsDAO =  SQLSession.getInstance().openSession(true).getMapper(IProductDAO.class);
+		companyDAO = SQLSession.getInstance().openSession(true).getMapper(ICompanyDAO.class);
 	}
 	
 	public ArrayList<Shop> getAllShops() {

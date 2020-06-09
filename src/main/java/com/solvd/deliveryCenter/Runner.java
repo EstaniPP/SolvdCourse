@@ -11,12 +11,11 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IShopDAO;
-import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.jaxb.JAXBCustomerParser;
 import com.solvd.deliveryCenter.models.Address;
 import com.solvd.deliveryCenter.models.Customer;
 import com.solvd.deliveryCenter.models.Shop;
+import com.solvd.deliveryCenter.services.ShopService;
 
 public class Runner {
 
@@ -140,10 +139,10 @@ public class Runner {
 		}
 		
 		//MyBatis test
-		IShopDAO bhDao = SQLSession.getInstance().openSession(true).getMapper(IShopDAO.class);
+		ShopService bhDao = new ShopService();
 
-		bhDao.getAllEntities().stream().forEach(b -> LOGGER.info(b.getId()));
-		Shop b = bhDao.getAllEntities().stream().findAny().get();
+		bhDao.getAllShops().stream().forEach(b -> LOGGER.info(b.getId()));
+		Shop b = bhDao.getAllShops().stream().findAny().get();
 		LOGGER.info(b.getId());
 		LOGGER.info(b.getOpenHours().size());
 		b.getOpenHours().stream().forEach(bh -> LOGGER.info(bh.getId()));

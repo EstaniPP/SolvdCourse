@@ -2,16 +2,16 @@ package com.solvd.deliveryCenter.services;
 
 import java.util.ArrayList;
 
-import com.solvd.deliveryCenter.DAO.DepartmentDAO;
-import com.solvd.deliveryCenter.DAO.DAOInterfaces.IEntityDAO;
+import com.solvd.deliveryCenter.DAO.DAOInterfaces.IDepartmentDAO;
+import com.solvd.deliveryCenter.connectionPool.SQLSession;
 import com.solvd.deliveryCenter.models.Department;
 
 public class DepartmentService {
 	
-	private IEntityDAO<Department> dDAO;
+	private IDepartmentDAO dDAO;
 	
 	public DepartmentService() {
-		dDAO = new DepartmentDAO();
+		dDAO = SQLSession.getInstance().openSession(true).getMapper(IDepartmentDAO.class);
 	}
 
 	public ArrayList<Department> getAllDepartments(){
